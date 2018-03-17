@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var app = express();
 
 /* GET sign up page. */
 router.get('/', function(req, res, next) {
@@ -10,8 +11,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function (req,res,next) {
-    console.log(req.body.email);
+    console.log('Hey');
+    console.log(req.body.name);
 });
+
 
 // router.get('/process_get',function(req,res){
 //     var response = {
