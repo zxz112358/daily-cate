@@ -21,10 +21,9 @@ router.post('/', function (req,res,next) {
     var password2 = req.body.password2;
 
     //Form validator
-    req.checkBody('name', 'Name field is required').notEmpty();
+    req.checkBody('name', 'User name field is required').notEmpty();
     req.checkBody('email', 'Email field is required').notEmpty();
     req.checkBody('email', 'Email is invalid').isEmail();
-    req.checkBody('username', 'Username field is required').notEmpty();
     req.checkBody('password', 'Password field is required').notEmpty();
     req.checkBody('password2', 'Password do not match').equals(req.body.password);
 
@@ -33,13 +32,13 @@ router.post('/', function (req,res,next) {
     var errors = req.validationErrors();
 
     if (errors){
+        console.log(errors);
         res.render('personalSec/signup', {
             title: 'Sign Up',
             name: 'Daily Cate',
             errors: errors
         });
-    }else{
-        console.log('no errors')
+
     }
 });
 

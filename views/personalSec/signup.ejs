@@ -18,8 +18,7 @@
 <ul class="errors">
     <% if(errors){ %>
         <%errors.forEach(function(each){%>
-            <li class="alert-danger w-75 mx-auto p-1">Invalid Field</li>
-    <!--TO DO: Display exact error messages-->
+            <p class="alert-danger w-75 mx-auto p-1"><%= each.msg%></p>
         <%})%>
     <%} %>
 </ul>
