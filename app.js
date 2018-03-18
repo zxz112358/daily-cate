@@ -15,11 +15,16 @@ var mysql = require('mysql');
 
 var index = require('./routes/index');
 var ingredient = require('./routes/ingredientSec/ingredient');
+var ingredient_vegetables = require('./routes/ingredientSec/ingredient_vegetables');
+var ingredient_fruits = require('./routes/ingredientSec/ingredient_fruits');
 var exhibition = require('./routes/exhibitionSec/exhibition');
 var asking = require('./routes/askingSec/asking');
 var signup = require('./routes/personalSec/signup');
 var signin = require('./routes/personalSec/signin');
-
+var helpPost = require('./routes/askingSec/helpPost');
+var post1 = require('./routes/ingredientSec/post1');
+var post2 = require('./routes/ingredientSec/post2');
+var post3 = require('./routes/ingredientSec/post3');
 
 var app = express();
 
@@ -78,10 +83,16 @@ app.use(function(req, res, next){
 
 app.use('/', index);
 app.use('/ingredientSec/ingredient', ingredient);
+app.use('/ingredientSec/ingredient_vegetables', ingredient_vegetables);
+app.use('/ingredientSec/ingredient_fruits', ingredient_fruits);
 app.use('/exhibitionSec/exhibition', exhibition);
 app.use('/askingSec/asking', asking);
 app.use('/personalSec/signup', signup);
 app.use('/personalSec/signin', signin);
+app.use('/askingSec/helpPost',helpPost);
+app.use('/ingredientSec/post1',post1);
+app.use('/ingredientSec/post2',post2);
+app.use('/ingredientSec/post3',post3);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
