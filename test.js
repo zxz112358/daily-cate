@@ -45,7 +45,7 @@ function update_client(name,email,pwd,desc){
 function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,parastart){
 	//pictures for this article will be stored before and pass the startID and picture numbers 
 	for(var i=0;i<picNo;i++){
-		var index=picstart+picNo;
+		var index=picstart+i;
 		var in_picture = "insert into pictures values ("+index+")";
 		connection.query(in_picture, function(error, results) {
    			if (error) {
@@ -56,7 +56,7 @@ function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,pa
 	}
 	//paragraphs for this article will be stored before and pass the startID and paragraph numbers 
 	for(var i=0;i<paraNo;i++){
-		var index=parastart+paraNo;
+		var index=parastart+i;
 		var in_paragraph = "insert into paragraphs values ("+index+")";
 		connection.query(in_paragraph, function(error, results) {
    			if (error) {
@@ -66,7 +66,7 @@ function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,pa
 		});
 	}
 	//insert new article to the database
-	var in_article = "insert into articles values ("+arID+","+'\''+arname+'\''+","+'\''+tag+'\''+","+'\''+posttime+'\''+","+picNo+","+picstart+","+paraNo+","+parastart+")";
+	var in_article = "insert into articles values ("+arID+","+'\''+arname+'\''+","+'\''+auname+'\''+","+'\''+tag+'\''+","+'\''+posttime+'\''+","+picNo+","+picstart+","+paraNo+","+parastart+")";
 	connection.query(in_article, function(error, results) {
     	if (error) {
         	return console.error(error);   
@@ -144,6 +144,7 @@ function select_password(name){
     //return password to check the correctness of user input password
 }
 
+//get all info of a specific user, includes all articles and personal info.
 function select_client_info(name){
     var sel_client_info="select * from client c, articles a where c.username="+'\''+name+'\''+" and a.authorname="+'\''+name+'\'';
     connection.query(sel_client_info, function(error, results) {
@@ -170,18 +171,7 @@ function select_article_list(tag){
 
 }
 
-/*insert_client('user1','email','password','desc');
-update_client('user1','email','pp','desc');
-arID,arname,auname,tag,posttime,picNo,picstart,paraNo,parastart
 
-insert_article(0,'food','user1','vegetables',)*/
-var select = "select * from clients";
-connection.query(select, function(error, results) {
-    	if (error) {
-        	return console.error(error);   
-    	}
-    	console.log(results);   
-});	
 connection.end();
 
 
