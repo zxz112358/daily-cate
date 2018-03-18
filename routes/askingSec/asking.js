@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET asking page. */
+
 router.get('/', function(req, res, next) {
   res.render('askingSec/asking', {
     title: 'Help',
@@ -10,3 +11,4 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+console.log("this is the asking page!");

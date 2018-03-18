@@ -3946,6 +3946,7 @@ tbody.collapse.show {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  background-color: #FFA500;
   padding: 0.5rem 1rem;
 }
 
