@@ -146,7 +146,7 @@ function select_password(name){
 
 //get all info of a specific user, includes all articles and personal info.
 function select_client_info(name){
-    var sel_client_info="select * from client c, articles a where c.username="+'\''+name+'\''+" and a.authorname="+'\''+name+'\'';
+    var sel_client_info="select * from client c, articles a,comments o where c.username="+'\''+name+'\''+" and a.authorname="+'\''+name+'\''+" and o.authorname="+'\''+name+'\'';
     connection.query(sel_client_info, function(error, results) {
         if (error) {
             return console.error(error);   
