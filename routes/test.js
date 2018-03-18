@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 
 
 //insert new client records into database
-var insert_client=function(name,email,pwd,desc){
+function insert_client(name,email,pwd,desc){
 	var in_client = "insert into client values ("+'\''+name+'\''+","+'\''+email+'\''+","+'\''+pwd+'\''+","+'\''+desc+'\''+")";
 	connection.query(in_client, function(error, results) {
     	if (error) {
@@ -29,7 +29,7 @@ function delete_client(name,email,pwd,desc){
 };*/
 
 //update the info. of a certain client
-var update_client=function (name,email,pwd,desc){
+function update_client(name,email,pwd,desc){
 	var up_client = "update client set email="+'\''+email+'\''+",password="+'\''+pwd+'\''+",description="+'\''+desc+'\''+"where username="+'\''+name+'\'';
 	connection.query(up_client, function(error, results) {
     	if (error) {
@@ -42,7 +42,7 @@ var update_client=function (name,email,pwd,desc){
 };
 
 //insert new article records into database
-var insert_article=function (arID,arname,auname,tag,posttime,picNo,picstart,paraNo,parastart){
+function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,parastart){
 	//pictures for this article will be stored before and pass the startID and picture numbers 
 	for(var i=0;i<picNo;i++){
 		var index=picstart+i;
@@ -77,7 +77,7 @@ var insert_article=function (arID,arname,auname,tag,posttime,picNo,picstart,para
 };
 
 //delete an article with the given articleID
-var delete_article=function (arID){
+function delete_article(arID){
 	var de_article="delete from articles where articleID="+arID;
 	connection.query(de_article, function(error, results) {
     	if (error) {
@@ -91,7 +91,7 @@ var delete_article=function (arID){
 }
 
 //insert a new comment
-var insert_comment=function (coID,auname,content,arID){
+function insert_comment(coID,auname,content,arID){
 	var in_comment = "insert into comments values ("+coID+","+'\''+auname+'\''+","+'\''+content+'\''+","+arID+")";
 	connection.query(in_comment, function(error, results) {
     	if (error) {
@@ -104,7 +104,7 @@ var insert_comment=function (coID,auname,content,arID){
 };
 
 //delete a comment with the given commentID
-var delete_comment=function (coID){
+function delete_comment(coID){
 	var de_comment="delete from comments where commentID="+coID;
 	connection.query(de_comment, function(error, results) {
     	if (error) {
@@ -117,7 +117,7 @@ var delete_comment=function (coID){
 
 
 //select a particular article given articleID
-var select_article=function (arID){
+function select_article(arID){
 	var sel_article="select articlename,authorname,parastart,parano,picturestart,pictureno from articles where articleID="+arID;
 	connection.query(sel_article, function(error, results) {
     	if (error) {
@@ -133,7 +133,7 @@ var select_article=function (arID){
 }
 
 //check the correctness of user input password
-var select_password=function (name){
+function select_password(name){
     var sel_password="select password from client where username="+'\''+name+'\'';
     connection.query(sel_password, function(error, results) {
         if (error) {
@@ -145,7 +145,7 @@ var select_password=function (name){
 }
 
 //get all info of a specific user, includes all articles and personal info.
-var select_client_info=function (name){
+function select_client_info(name){
     var sel_client_info="select * from client c, articles a,comments o where c.username="+'\''+name+'\''+" and a.authorname="+'\''+name+'\''+" and o.authorname="+'\''+name+'\'';
     connection.query(sel_client_info, function(error, results) {
         if (error) {
@@ -159,7 +159,7 @@ var select_client_info=function (name){
 }
 
 //select a list of article names based on the given tag for user to choose
-var select_article_list=function (tag){
+function select_article_list(tag){
     var sel_article_list="select articlename,authorname from articles where tag="+'\''+tag+'\'';
     connection.query(sel_article_list, function(error, results) {
         if (error) {
@@ -171,8 +171,9 @@ var select_article_list=function (tag){
 
 }
 
+
 module.exports={
-	connection:connection,
+    connection:connection,
     insert_client:insert_client,
     update_client:update_client,
     insert_article:insert_article,
@@ -184,7 +185,3 @@ module.exports={
     select_client_info:select_client_info,
     select_article_list:select_article_list
 };
-//connection.end();
-
-
-

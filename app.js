@@ -25,6 +25,10 @@ var homepage = require('./routes/homepage/homepage');
 
 var app = express();
 
+
+var test = require('./routes/test');
+var connection = test.connection;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
