@@ -15,15 +15,13 @@
 <a class="text-dark mr-0" style="font-size: 12px;margin-left: 13%">Already have an account?</a>
 <a class="ml-0" href="./signin" style="font-size: 12px;margin-left: 13%">Sign In</a>
 
-<ul class="errors">
     <% if(errors){ %>
         <%errors.forEach(function(each){%>
-            <p class="alert-danger w-75 mx-auto p-1"><%= each.msg%></p>
+            <div class="alert-danger w-75 mx-auto p-2"><%= each.msg%></div>
         <%})%>
     <%} %>
-</ul>
 
-<form class="w-75 mx-auto mt-5" method="post">
+<form class="w-75 mx-auto mt-5 p-3 bg-white border border-warning" method="post">
     <div class="form-group">
         <label>User name</label>
         <input name="name" type="text" class="form-control" id="exampleInputName"placeholder="Enter user name">
