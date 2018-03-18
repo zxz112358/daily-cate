@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var test = require('../test');
-
+var connection = test.connection;
 
 /* GET sign up page. */
 router.get('/', function(req, res, next) {

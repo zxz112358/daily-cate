@@ -172,8 +172,16 @@ function select_article_list(tag){
 }
 
 
-connection.end();
-
-
-
-module.exports.insert_client = insert_client;
+module.exports={
+    connection:connection,
+    insert_client:insert_client,
+    update_client:update_client,
+    insert_article:insert_article,
+    delete_article:delete_article,
+    insert_comment:insert_comment,
+    delete_comment:delete_comment,
+    select_article:select_article,
+    select_password:select_password,
+    select_client_info:select_client_info,
+    select_article_list:select_article_list
+};
