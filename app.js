@@ -19,6 +19,7 @@ var exhibition = require('./routes/exhibitionSec/exhibition');
 var asking = require('./routes/askingSec/asking');
 var signup = require('./routes/personalSec/signup');
 var signin = require('./routes/personalSec/signin');
+var signout = require('./routes/personalSec/signout');
 
 
 var app = express();
@@ -82,6 +83,7 @@ app.use('/exhibitionSec/exhibition', exhibition);
 app.use('/askingSec/asking', asking);
 app.use('/personalSec/signup', signup);
 app.use('/personalSec/signin', signin);
+app.use('/personalSec/signout', signout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

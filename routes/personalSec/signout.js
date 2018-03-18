@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/* GET sign in page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {
-    title: 'Home',
-    name:'Daily Cate'
-  });
+    res.render('personalSec/signout', {
+        title: 'Sign Out',
+        name: 'Daily Cate'
+    });
 });
 
 module.exports = router;
