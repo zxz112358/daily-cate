@@ -11,19 +11,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function (req,res,next) {
-    //store in database
-    var name = req.body.name;
-    var email = req.body.email;
-    var password = req.body.password;
-    var description = req.body.description;
-
-    //only for validation
-    var password2 = req.body.password2;
-
     //Form validator
     req.checkBody('name', 'User name field is required').notEmpty();
     req.checkBody('email', 'Email field is required').notEmpty();
-    req.checkBody('email', 'Email is invalid').isEmail();
+    req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('password', 'Password field is required').notEmpty();
     req.checkBody('password2', 'Password do not match').equals(req.body.password);
 
@@ -38,7 +29,12 @@ router.post('/', function (req,res,next) {
             name: 'Daily Cate',
             errors: errors
         });
-
+    }else {
+        //store in database
+        var name = req.body.name;
+        var email = req.body.email;
+        var password = req.body.password;
+        var description = req.body.description;
     }
 });
 
