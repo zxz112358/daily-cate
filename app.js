@@ -24,6 +24,14 @@ var signout = require('./routes/personalSec/signout');
 
 var app = express();
 
+var connection = mysql.createConnection({
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "123123",
+    "database": "csci3100"
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

@@ -176,3 +176,4 @@ connection.end();
 
 
 
+module.exports.insert_client = insert_client;

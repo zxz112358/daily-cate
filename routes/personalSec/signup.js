@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var test = require('../test');
+
+
 /* GET sign up page. */
 router.get('/', function(req, res, next) {
     res.render('personalSec/signup', {
@@ -11,6 +14,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function (req,res,next) {
+
+    //store in database
+    var name = req.body.name;
+    var email = req.body.email;
+    var password = req.body.password;
+    var description = req.body.description;
+
     //Form validator
     req.checkBody('name', 'User name field is required').notEmpty();
     req.checkBody('email', 'Email field is required').notEmpty();
@@ -30,11 +40,11 @@ router.post('/', function (req,res,next) {
             errors: errors
         });
     }else {
-        //store in database
-        var name = req.body.name;
-        var email = req.body.email;
-        var password = req.body.password;
-        var description = req.body.description;
+        // TO DO: save new user to database
+        test.insert_client(name,email,password,description);
+
+        res.location('/');
+        res.redirect('/');
     }
 });
 
