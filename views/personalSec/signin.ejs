@@ -1,16 +1,29 @@
-<!DOCTYPE html>
-<html>
+
+<!doctype html>
+<html lang="en">
 
 <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <link rel='stylesheet' href='/stylesheets/stylesheet.css' />
 </head>
 
 <% include ../header.ejs %>
 
-<body background="../images/pattern.svg">
-<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
-<p>Sign in page here</p>
-</body>
+<body class="text-center bg-warning">
 
+<% if (message){ %>
+    <div class="bg-success container text-white w-75" style="font-size: 1.5em"><%= message%></div>
+<% } %>
+
+<form class="form-signin w-25 mx-auto m-5">
+    <img class="mb-4" src="../images/icon.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal text-white"><%= name%></h1>
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="email" id="inputEmail" class="form-control m-3" placeholder="Username" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control m-3" placeholder="Password" required>
+    <center><button class="btn btn-lg btn-block bg-warning border-0 w-50 text-white" type="submit">Sign in</button></center>
+</form>
+</body>
 </html>

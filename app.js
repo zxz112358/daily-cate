@@ -9,7 +9,6 @@ var session = require('express-session');
 var passport = require('passport');
 var expressValidator = require('express-validator');
 var LocalStrategy = require('passport-local').Strategy;
-var multer = require('multer');
 var flash = require('connect-flash');
 var mysql = require('mysql');
 
@@ -56,9 +55,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Handle Sessions
 app.use(session({
     secret: 'secret',
-    saveUninitialized: true,
-    resave: true
+    saveUninitialized: false,
+    resave: false
 }));
+
+app.use(flash());
 
 //Passport
 app.use(passport.initialize());

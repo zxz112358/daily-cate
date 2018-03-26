@@ -12,8 +12,8 @@
 
 <h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
 <p style="margin-left: 13%">Sign up and join us NOW!</p>
-<a class="text-dark mr-0" style="font-size: 12px;margin-left: 13%">Already have an account?</a>
-<a class="ml-0" href="./signin" style="font-size: 12px;margin-left: 13%">Sign In</a>
+<a class="text-dark mr-0" style="font-size: 13px;margin-left: 13%">Already have an account?</a>
+<a class="ml-0" href="./signin" style="font-size: 13px;margin-left: 13%">Sign In</a>
 
     <% if(errors){ %>
         <%errors.forEach(function(each){%>
@@ -21,7 +21,7 @@
         <%})%>
     <%} %>
 
-<form class="w-75 mx-auto mt-5 p-3 bg-white border border-warning" method="post">
+<form class="w-75 mx-auto mt-5 p-3 border border-warning bg-white" method="post">
     <div class="form-group">
         <label>User name</label>
         <input name="name" type="text" class="form-control" id="exampleInputName"placeholder="Enter user name">

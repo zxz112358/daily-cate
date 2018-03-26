@@ -41,10 +41,13 @@ router.post('/', function (req,res,next) {
         });
     }else {
         // TO DO: save new user to database
+
         test.insert_client(name,email,password,description);
 
-        res.location('/');
-        res.redirect('/');
+        req.flash('signup_success', 'You are now registered and can log in!');
+
+        //res.location('personalSec/signin');
+        res.redirect('signin');
     }
 });
 
