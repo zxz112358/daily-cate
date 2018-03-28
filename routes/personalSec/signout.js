@@ -7,6 +7,10 @@ router.get('/', function(req, res, next) {
         title: 'Sign Out',
         name: 'Daily Cate'
     });
+
+    req.logout();
+    req.flash('success_msg', 'You are now logged out.');
+    req.redirect('../index');
 });
 
 module.exports = router;
