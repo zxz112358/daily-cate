@@ -7,11 +7,11 @@ var bodyParser = require('body-parser');
 
 var session = require('express-session');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var mysql = require('mysql');
 var MySQLStore = require('express-mysql-session')(session);
 
 var expressValidator = require('express-validator');
-var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 
 var index = require('./routes/index');
@@ -27,7 +27,11 @@ var helpPost = require('./routes/askingSec/helpPost');
 var signup = require('./routes/personalSec/signup');
 var signin = require('./routes/personalSec/signin');
 var signout = require('./routes/personalSec/signout');
+var profile = require('./routes/personalSec/profile');
+
 var homepage = require('./routes/homepage/homepage');
+
+var test = require('../test');
 
 
 var app = express();
@@ -112,7 +116,25 @@ app.use('/askingSec/helpPost', helpPost);
 app.use('/personalSec/signup', signup);
 app.use('/personalSec/signin', signin);
 app.use('/personalSec/signout', signout);
+app.use('/personalSec/profile', profile);
 app.use('/homepage/homepage',homepage);
+
+
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        console.log(username);
+        console.log(password);
+
+        //check whether the username exists, if exists, return password
+        var result;
+        if (result.length === 0){
+            return done(null, false);
+        }else if (result === password.toString()){
+            return done(null, 'suc');
+        }
+    }
+));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -15,38 +15,22 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.post('/', passport.authenticate('local', {
+    successRedirect: 'personalSec/profile',
+    failureRedirect: '/'
+}));
 
-
-
-// passport.use(new LocalStrategy(function (username, password, done) {
-//         getUserByUsername(username, function (err, user) {
-//             if(err) throw err;
-//             if(!user){
-//                 return done(null, false, {message: 'Unknown User'});
-//             }
+// router.post('/', function(req, res){
 //
-//             comparePassword(password, userPassword, function (err, isMatch) {
-//                 if (err) return done(err);
-//                 if (isMatch){
-//                     return done(null, user);
-//                 }else {
-//                     return done(null, false, {message: 'Invalid Password'});
-//                 }
-//             });
-//         });
-//     }));
-
-router.post('/', function(req, res){
-
-    var inputUsername = req.body.username;
-    var inputPassword = req.body.password;
-
-    //retrieve user id from db here
-    const username = inputUsername;
-    req.login(username, function(err){
-        res.redirect('/');
-    });
-});
+//     var inputUsername = req.body.username;
+//     var inputPassword = req.body.password;
+//
+//     //retrieve user id from db here
+//     const username = inputUsername;
+//     req.login(username, function(err){
+//         res.redirect('personalSec/profile');
+//     });
+// });
 
 passport.serializeUser(function(username, done) {
     done(null, username);
