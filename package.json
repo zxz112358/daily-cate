@@ -17,10 +17,10 @@
     "express-messages": "*",
     "express-validator": "*",
     "express-session": "*",
+    "express-mysql-session": "^1.2.3",
     "passport": "*",
     "passport-local": "*",
     "passport-http": "*",
-    "multer": "*",
     "mysql": "*"
   }
 }
