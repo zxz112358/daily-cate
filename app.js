@@ -31,7 +31,7 @@ var profile = require('./routes/personalSec/profile');
 
 var homepage = require('./routes/homepage/homepage');
 
-var test = require('../test');
+var test = require('./test');
 
 
 var app = express();
@@ -71,6 +71,11 @@ app.use(session({
 //Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function (req, res, next) {
+    res.locals.isAuthenticated = req.isAuthenticated();
+    next();
+})
 
 
 app.use(express.static(path.join(__dirname, 'public')));

@@ -20,17 +20,6 @@ router.post('/', passport.authenticate('local', {
     failureRedirect: '/'
 }));
 
-// router.post('/', function(req, res){
-//
-//     var inputUsername = req.body.username;
-//     var inputPassword = req.body.password;
-//
-//     //retrieve user id from db here
-//     const username = inputUsername;
-//     req.login(username, function(err){
-//         res.redirect('personalSec/profile');
-//     });
-// });
 
 passport.serializeUser(function(username, done) {
     done(null, username);

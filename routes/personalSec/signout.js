@@ -9,8 +9,10 @@ router.get('/', function(req, res, next) {
     });
 
     req.logout();
+    req.session.destroy();
+
     req.flash('success_msg', 'You are now logged out.');
-    req.redirect('../index');
+    res.redirect('../index');
 });
 
 module.exports = router;
