@@ -9,10 +9,12 @@ router.get('/', function(req, res, next) {
     });
 
     req.logout();
-    req.session.destroy();
+    req.session.destroy(function () {
+        res.clearCookie('connect.sid');
+        res.redirect('../index');
+    });
 
     req.flash('success_msg', 'You are now logged out.');
-    res.redirect('../index');
 });
 
 module.exports = router;

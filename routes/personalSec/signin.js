@@ -16,17 +16,37 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', passport.authenticate('local', {
-    successRedirect: 'personalSec/profile',
+    successRedirect: 'profile',
     failureRedirect: '/'
 }));
 
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        console.log(username);
+        console.log(password);
 
-passport.serializeUser(function(username, done) {
-    done(null, username);
+        //check whether the username exists, if exists, return password
+        // var result;
+        // if (result.length === 0){
+        //     return done(null, false);
+        // }else if (result === password.toString()){
+        //     return done(null, 'suc');
+        // }
+
+        //delete after password can be retrieved from db
+        return done(null, 'suc');
+    }
+));
+
+passport.serializeUser(function(user, done) {
+    done(null, {
+        userid: user["id"],
+        username: user["username"]
+    });
 });
 
-passport.deserializeUser(function(username, done) {
-    done(null, username);
+passport.deserializeUser(function(user, done) {
+    done(null, user);
 });
 
 

@@ -16,11 +16,11 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 
 /* Check user's authentication, if not logged in, redirect user to log in page */
 function authenticationMiddleware () {
-    return (req, res, next) => {
+    return function (req, res, next){
         //console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
 
         if (req.isAuthenticated()) return next();
-        res.redirect('/personalSec/signin')
+        res.redirect('signin');
     }
 }
 

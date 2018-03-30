@@ -55,7 +55,7 @@ var options = {
     "host": "localhost",
     "port": 3306,
     "user": "root",
-    "password": "123123",
+    "password": "muzi6771914",
     "database": "csci3100"
 };
 var sessionStore = new MySQLStore(options);
@@ -125,20 +125,23 @@ app.use('/personalSec/profile', profile);
 app.use('/homepage/homepage',homepage);
 
 
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        console.log(username);
-        console.log(password);
-
-        //check whether the username exists, if exists, return password
-        var result;
-        if (result.length === 0){
-            return done(null, false);
-        }else if (result === password.toString()){
-            return done(null, 'suc');
-        }
-    }
-));
+// passport.use(new LocalStrategy(
+//     function(username, password, done) {
+//         console.log(username);
+//         console.log(password);
+//
+//         //check whether the username exists, if exists, return password
+//         // var result;
+//         // if (result.length === 0){
+//         //     return done(null, false);
+//         // }else if (result === password.toString()){
+//         //     return done(null, 'suc');
+//         // }
+//
+//         //delete after password can be retrieved from db
+//         return done(null, 'suc');
+//     }
+// ));
 
 
 // catch 404 and forward to error handler
