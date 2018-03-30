@@ -12,7 +12,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
         title: 'Sign In',
         name: 'Daily Cate',
         signup_message: req.flash('signup_success'),
-        signin_message: req.flash('signin_msg'),
+        message: req.flash('error'),
         user: req.user
     });
 });
@@ -30,7 +30,8 @@ function authenticationMiddleware () {
 
 router.post('/', passport.authenticate('local', {
     successRedirect: 'profile',
-    failureRedirect: '/'
+    failureRedirect: '/personalSec/signin',
+    failureFlash : true
 }));
 
 passport.use(new LocalStrategy(
@@ -41,6 +42,7 @@ passport.use(new LocalStrategy(
         test.select_user(username,function(result){
             if(result===false){
                 console.log("user name does not exist.");
+                return done(null,false, { message: 'Username doe not exist.' });
             }
             else{
                 console.log(result.username);
@@ -50,9 +52,9 @@ passport.use(new LocalStrategy(
                 if (result.password === password){
                     return done(null, result);
                 } else {
-                    req.flash('signin_msg', 'Sign in failed.');
-                    return done(null,false);
+                    return done(null,false, { message: 'Password incorrect.' });
                 }
+
             }
         });
     }
