@@ -187,6 +187,7 @@ function select_user(name,callback){
         Object.keys(results).forEach(function(key){
             var row=results[key];
             return callback(row);
+            //liumuzi is clever
 
         });
 
