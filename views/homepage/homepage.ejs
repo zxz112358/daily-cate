@@ -4,13 +4,60 @@
 <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+
+    <style>
+        body{ margin:0; padding:0}
+        video{
+            right: 0;
+            bottom: 0;
+
+            width: auto;
+            height: auto;
+            min-width: 100%;
+            min-height: 100%;
+            position: relative;
+            z-index:-55;
+            width: 100%;
+        }
+        .div-1{
+            position:relative;
+        }
+        .div-1 video{
+            position:relative;
+            z-index:0;
+        }
+        .div-2{
+            text-align:center;
+            margin:0 auto;
+            position:absolute;
+            top:0;
+            left:0;
+            margin-center:100;
+            z-index:20;
+        }
+    </style>
 </head>
 
 <% include ../header.ejs %>
 
 <body background="../images/pattern.svg">
-<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
-<p>Welcome to <%= title %></p>
-<p>This is Home Section</p>
+<div class="div-1">
+    <video autoplay muted loop id="bgvid">
+        <source src="../images/homepage.mp4" type="video/mp4">
+
+    </video>
+    <div class="div-2">
+        <!--<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>-->
+
+        <p class="font-weight-bold text-warning"><font size="20"><br /><br /><br /><br /><br /><br /><br />Daily Cate</font></p>
+        <p>Welcome to <%= title %></p>
+        <p>This is Home Section</p>
+    </div>
+
+</div>
+
+
+
+
 </body>
 </html>
