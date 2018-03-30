@@ -45,8 +45,6 @@ router.post('/', function (req,res,next) {
         test.insert_client(name,email,password,description);
 
         req.flash('signup_success', 'You are now registered and can log in!');
-
-        //res.location('personalSec/signin');
         res.redirect('signin');
     }
 });

@@ -5,16 +5,18 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('personalSec/signout', {
         title: 'Sign Out',
-        name: 'Daily Cate'
+        name: 'Daily Cate',
+        message:'You are now logged out.'
     });
 
     req.logout();
+
+
     req.session.destroy(function () {
-        res.clearCookie('connect.sid');
-        res.redirect('../index');
+        //res.clearCookie('connect.sid');
     });
 
-    req.flash('success_msg', 'You are now logged out.');
+
 });
 
 module.exports = router;

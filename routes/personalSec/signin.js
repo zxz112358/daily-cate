@@ -33,16 +33,15 @@ passport.use(new LocalStrategy(
         //     return done(null, 'suc');
         // }
 
+
+
         //delete after password can be retrieved from db
-        return done(null, 'suc');
+        return done(null, username);
     }
 ));
 
 passport.serializeUser(function(user, done) {
-    done(null, {
-        userid: user["id"],
-        username: user["username"]
-    });
+    done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {

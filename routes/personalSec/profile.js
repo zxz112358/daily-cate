@@ -10,17 +10,22 @@ var connection = test.connection;
 router.get('/', authenticationMiddleware(), function(req, res, next) {
     res.render('personalSec/profile', {
         title: 'Profile',
-        name: 'Daily Cate'
+        name: 'Daily Cate',
+        username: req["user"]
     });
+    console.log(req.user);
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */
 function authenticationMiddleware () {
     return function (req, res, next){
-        //console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+        console.log(req.session.passport.user);
 
-        if (req.isAuthenticated()) return next();
-        res.redirect('signin');
+        if (req.isAuthenticated()) {
+            return next();
+        }else{
+            res.redirect('signin');
+        }
     }
 }
 
