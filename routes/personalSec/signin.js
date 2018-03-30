@@ -11,8 +11,9 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
     res.render('personalSec/signin', {
         title: 'Sign In',
         name: 'Daily Cate',
-        message: req.flash('signup_success'),
-        username: req.user.username
+        signup_message: req.flash('signup_success'),
+        signin_message: req.flash('signin_msg'),
+        user: req.user
     });
 });
 
@@ -38,7 +39,7 @@ passport.use(new LocalStrategy(
         console.log(password);
 
         test.select_user(username,function(result){
-            if(result==false){
+            if(result===false){
                 console.log("user name does not exist.");
             }
             else{
@@ -46,9 +47,10 @@ passport.use(new LocalStrategy(
                 console.log(result.email);
                 console.log(result.password);
 
-                if (result.password == password){
+                if (result.password === password){
                     return done(null, result);
                 } else {
+                    req.flash('signin_msg', 'Sign in failed.');
                     return done(null,false);
                 }
             }

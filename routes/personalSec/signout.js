@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
         title: 'Sign Out',
         name: 'Daily Cate',
         message:'You are now logged out.',
-        username: req.user.username
+        user: req.user
     });
 
     req.logout();

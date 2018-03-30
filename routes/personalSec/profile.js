@@ -11,7 +11,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
     res.render('personalSec/profile', {
         title: 'Profile',
         name: 'Daily Cate',
-        username: req.user.username
+        user: req.user
     });
     console.log(req.user);
 });

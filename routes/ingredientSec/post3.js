@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
         title: 'Post 3',
         name:'Daily Cate',
         author:'XXX',
-        username: req.user.username
+        user: req.user
     });
 });
 

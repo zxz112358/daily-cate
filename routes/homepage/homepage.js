@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
     res.render('homepage/homepage', {
         title: 'Home',
         name:'Daily Cate',
-        username: req.user.username
+        user: req.user
     });
 });
 
