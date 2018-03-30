@@ -24,13 +24,13 @@
 
         </ul>
         <ul class="nav justify-content-end">
-            <% if (isAuthenticated == false){ %>
+            <% if (isAuthenticated == false || user == null){ %>
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="/personalSec/signin">Sign In</a>
                 </li>
-            <% } else { %>
+            <% } else if (user != null) { %>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/personalSec/profile"><%= user.username %> Profile</a>
+                    <a class="nav-link text-dark" href="/personalSec/profile"><%= user.username %>'s Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="/personalSec/signout">Sign out</a>
