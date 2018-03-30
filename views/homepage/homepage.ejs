@@ -4,13 +4,42 @@
 <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <style>
+        .div-bottom{
+            position:relative;
+        }
+        .div-bottom video{
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position:relative;
+            z-index:0;
+        }
+        .overlay{
+            position:absolute;
+            top:0;
+            left:0;
+            z-index:5;
+        }
+    </style>
 </head>
 
 <% include ../header.ejs %>
 
 <body background="../images/pattern.svg">
-<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
-<p>Welcome to <%= title %></p>
-<p>This is Home Section</p>
+<div class="div-bottom">
+    <video id="video" autoplay muted loop>
+        <source src="../images/homepage.mp4" type="video/mp4"/>
+    </video>
+    <div class="overlay">
+        <h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
+        <p>Welcome to <%= title %></p>
+        <p>This is Home Section</p>
+    </div>
+</div>
+
+
+
 </body>
 </html>
