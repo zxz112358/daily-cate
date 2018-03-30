@@ -26,14 +26,13 @@ passport.use(new LocalStrategy(
         console.log(password);
 
         //check whether the username exists, if exists, return password
+
         // var result;
         // if (result.length === 0){
         //     return done(null, false);
         // }else if (result === password.toString()){
         //     return done(null, 'suc');
         // }
-
-
 
         //delete after password can be retrieved from db
         return done(null, username);
