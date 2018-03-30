@@ -5,7 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('homepage/homepage', {
         title: 'Home',
-        name:'Daily Cate'
+        name:'Daily Cate',
+        username: req["user"]
     });
 });
 

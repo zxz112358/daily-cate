@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
     res.render('personalSec/signup', {
         title: 'Sign Up',
         name: 'Daily Cate',
-        errors: undefined
+        errors: undefined,
+        username: req["user"]
     });
 });
 

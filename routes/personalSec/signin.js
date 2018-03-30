@@ -11,7 +11,8 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
     res.render('personalSec/signin', {
         title: 'Sign In',
         name: 'Daily Cate',
-        message: req.flash('signup_success')
+        message: req.flash('signup_success'),
+        username: req["user"]
     });
 });
 

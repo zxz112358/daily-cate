@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
 
   res.render('index', {
     title: 'Welcome to Daily Cate!',
-    name:'Daily Cate'
+    name:'Daily Cate',
+    username: req["user"]
   });
 });
 

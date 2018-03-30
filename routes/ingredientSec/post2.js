@@ -6,7 +6,8 @@ router.get('/', function(req, res, next) {
     res.render('ingredientSec/post2', {
         title: 'Post 2',
         name:'Daily Cate',
-        author:'XXX'
+        author:'XXX',
+        username: req["user"]
     });
 });
 

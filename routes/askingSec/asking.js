@@ -6,7 +6,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('askingSec/asking', {
     title: 'Help',
-    name:'Daily Cate'
+    name:'Daily Cate',
+      username: req["user"]
   });
 });
 

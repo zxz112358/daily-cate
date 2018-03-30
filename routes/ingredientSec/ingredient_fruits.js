@@ -5,7 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('ingredientSec/ingredient_fruits', {
     title: 'Ingredients',
-    name: 'Daily Cate'
+    name: 'Daily Cate',
+      username: req["user"]
   });
 });
 
