@@ -7,9 +7,32 @@ var connection = mysql.createConnection({
     "host": "localhost",
     "port": 3306,
     "user": "root",
-    "password": "muzi6771914",
+    "password": "123123",
     "database": "csci3100"
  });
+var select_username=function(name,callback){
+    var sel_username="select username,email from client where username="+'\''+name+'\'';
+
+    connection.query(sel_username, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        if(Object.keys(results).length==0){
+            return callback(false);
+        }
+        //console.log(results.username);
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });
+
+
+    });
+    //select_password(name);
+    //return true if username exists and false if not
+};
+
 
 
 //insert new client records into database
@@ -88,7 +111,7 @@ var delete_article=function (arID){
 	connection.end();
     //return T or F
 
-}
+};
 
 //insert a new comment
 var insert_comment=function (coID,auname,content,arID){
@@ -113,7 +136,7 @@ var delete_comment=function (coID){
     	console.log(results);   
 	});
     //return T or F
-}
+};
 
 
 //select a particular article given articleID
@@ -130,7 +153,7 @@ var select_article=function (arID){
 	//for loop to open the files
     //how to get the variables parastart, parano,picstart,picno
     //return all pictures, paragrahs and comments of this article
-}
+};
 
 //check the correctness of user input password
 var select_password=function (name){
@@ -142,7 +165,7 @@ var select_password=function (name){
         console.log(results);   
     });
     //return password to check the correctness of user input password
-}
+};
 
 //get all info of a specific user, includes all articles and personal info.
 var select_client_info=function (name){
@@ -156,7 +179,7 @@ var select_client_info=function (name){
     //how to get a.parastart, a.parano, a.picstart, a.picno
     //based on the variables to return all the pictures and paragraphs of all articles of the author
     //return all comments the author posted
-}
+};
 
 //select a list of article names based on the given tag for user to choose
 var select_article_list=function (tag){
@@ -169,7 +192,8 @@ var select_article_list=function (tag){
     });
     //return the list of articles with articlenames and authornames
 
-}
+};
+
 
 module.exports={
 	connection:connection,
@@ -182,9 +206,9 @@ module.exports={
     select_article:select_article,
     select_password:select_password,
     select_client_info:select_client_info,
-    select_article_list:select_article_list
+    select_article_list:select_article_list,
+	select_username:select_username
 };
 //connection.end();
-
 
 
