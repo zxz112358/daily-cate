@@ -26,7 +26,7 @@ router.post('/', function (req,res,next) {
     req.checkBody('email', 'Email field is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('password', 'Password field is required').notEmpty();
-    req.checkBody('password2', 'Password do not match').equals(req.body.password);
+    req.checkBody('password2', 'Password does not match').equals(req.body.password);
 
 
     //Check errors
@@ -40,8 +40,6 @@ router.post('/', function (req,res,next) {
             errors: errors
         });
     }else {
-        // TO DO: save new user to database
-
         test.insert_client(name,email,password,description);
 
         req.flash('signup_success', 'You are now registered and can log in!');

@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
     "host": "localhost",
     "port": 3306,
     "user": "root",
-    "password": "muzi6771914",
+    "password": "123123",
     "database": "csci3100"
  });
 
@@ -171,6 +171,10 @@ var select_article_list=function (tag){
 
 }
 
+var testing = function(){
+    console.log('testing');
+}
+
 module.exports={
 	connection:connection,
     insert_client:insert_client,
@@ -182,7 +186,8 @@ module.exports={
     select_article:select_article,
     select_password:select_password,
     select_client_info:select_client_info,
-    select_article_list:select_article_list
+    //select_article_list:select_article_list,
+    testing:testing
 };
 //connection.end();
 
