@@ -11,7 +11,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
     res.render('personalSec/profile', {
         title: 'Profile',
         name: 'Daily Cate',
-        username: req["user"]
+        username: req.user.username
     });
     console.log(req.user);
 });
@@ -19,7 +19,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 /* Check user's authentication, if not logged in, redirect user to log in page */
 function authenticationMiddleware () {
     return function (req, res, next){
-        console.log(req.session.passport.user);
+        console.log('user:', req.session.passport.user);
 
         if (req.isAuthenticated()) {
             return next();

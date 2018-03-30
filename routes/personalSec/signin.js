@@ -12,15 +12,13 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
         title: 'Sign In',
         name: 'Daily Cate',
         message: req.flash('signup_success'),
-        username: req["user"]
+        username: req.user.username
     });
 });
 
 /* Check user's authentication, if already logged in, show messages */
 function authenticationMiddleware () {
     return function (req, res, next){
-        //console.log(req.session.passport.user);
-
         if (req.isAuthenticated()){
             req.flash('signup_success', 'You are already logged in!');
         }
@@ -39,9 +37,7 @@ passport.use(new LocalStrategy(
         console.log(username);
         console.log(password);
 
-        //check whether the username exists, if exists, return password
-        var result;
-        test.select_username(username,function(result){
+        test.select_user(username,function(result){
             if(result==false){
                 console.log("user name does not exist.");
             }
@@ -51,26 +47,21 @@ passport.use(new LocalStrategy(
                 console.log(result.password);
 
                 if (result.password == password){
-                    console.log('password correct.');
-                    return done(null, username);
+                    return done(null, result);
                 } else {
                     return done(null,false);
                 }
             }
         });
-        //if (result.length === 0){
-        //     return done(null, false);
-        // }else if (result === password.toString()){
-        //     return done(null, 'suc');
-        // }
-
-        //delete after password can be retrieved from db
-        //return done(null, username);
     }
 ));
 
 passport.serializeUser(function(user, done) {
-    done(null, user);
+    done(null, {
+        username: user.username,
+        email: user.email,
+        description: user.description
+    });
 });
 
 passport.deserializeUser(function(user, done) {

@@ -173,8 +173,8 @@ function select_article_list(tag){
 
 }
 
-function select_username(name,callback){
-    var sel_username="select username,email,password from client where username="+'\''+name+'\'';
+function select_user(name,callback){
+    var sel_username="select username,email,password,description from client where username="+'\''+name+'\'';
 
     connection.query(sel_username, function(error, results) {
         if (error) {
@@ -209,5 +209,5 @@ module.exports={
     select_password:select_password,
     select_client_info:select_client_info,
     select_article_list:select_article_list,
-    select_username: select_username
+    select_user: select_user
 };

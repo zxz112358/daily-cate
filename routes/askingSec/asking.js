@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('askingSec/asking', {
     title: 'Help',
     name:'Daily Cate',
-    username: req["user"]
+    username: req.user.username
   });
 });
 
