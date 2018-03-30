@@ -125,25 +125,6 @@ app.use('/personalSec/profile', profile);
 app.use('/homepage/homepage',homepage);
 
 
-// passport.use(new LocalStrategy(
-//     function(username, password, done) {
-//         console.log(username);
-//         console.log(password);
-//
-//         //check whether the username exists, if exists, return password
-//         // var result;
-//         // if (result.length === 0){
-//         //     return done(null, false);
-//         // }else if (result === password.toString()){
-//         //     return done(null, 'suc');
-//         // }
-//
-//         //delete after password can be retrieved from db
-//         return done(null, 'suc');
-//     }
-// ));
-
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -133,13 +133,15 @@ function select_article(arID){
 }
 
 //check the correctness of user input password
-function select_password(name){
+function select_password(name, callback){
     var sel_password="select password from client where username="+'\''+name+'\'';
+    var results;
     connection.query(sel_password, function(error, results) {
         if (error) {
-            return console.error(error);   
+            return console.error(error);
         }
-        console.log(results);   
+        //console.log(results);
+        return callback(true);
     });
     //return password to check the correctness of user input password
 }
@@ -171,6 +173,29 @@ function select_article_list(tag){
 
 }
 
+function select_username(name,callback){
+    var sel_username="select username,email,password from client where username="+'\''+name+'\'';
+
+    connection.query(sel_username, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        if(Object.keys(results).length===0){
+            return callback(false);
+        }
+        //console.log(results.username);
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });
+
+
+    });
+    //select_password(name);
+    //return true if username exists and false if not
+}
+
 
 module.exports={
     connection:connection,
@@ -183,5 +208,6 @@ module.exports={
     select_article:select_article,
     select_password:select_password,
     select_client_info:select_client_info,
-    select_article_list:select_article_list
+    select_article_list:select_article_list,
+    select_username: select_username
 };

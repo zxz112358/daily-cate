@@ -19,7 +19,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 /* Check user's authentication, if already logged in, show messages */
 function authenticationMiddleware () {
     return function (req, res, next){
-        console.log(req.session.passport.user);
+        //console.log(req.session.passport.user);
 
         if (req.isAuthenticated()){
             req.flash('signup_success', 'You are already logged in!');
@@ -40,16 +40,32 @@ passport.use(new LocalStrategy(
         console.log(password);
 
         //check whether the username exists, if exists, return password
-        var result = test.testing();
-        // var result;
-        // if (result.length === 0){
+        var result;
+        test.select_username(username,function(result){
+            if(result==false){
+                console.log("user name does not exist.");
+            }
+            else{
+                console.log(result.username);
+                console.log(result.email);
+                console.log(result.password);
+
+                if (result.password == password){
+                    console.log('password correct.');
+                    return done(null, username);
+                } else {
+                    return done(null,false);
+                }
+            }
+        });
+        //if (result.length === 0){
         //     return done(null, false);
         // }else if (result === password.toString()){
         //     return done(null, 'suc');
         // }
 
         //delete after password can be retrieved from db
-        return done(null, username);
+        //return done(null, username);
     }
 ));
 
