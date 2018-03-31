@@ -122,6 +122,42 @@ function select_article(arID){
     //return all pictures, paragrahs and comments of this article
 }
 
+function select_article_comment(arID,callback){
+    var sel_article_comment="select * from comments where articleID="+arID;
+    connection.query(sel_article_comment, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });
+    });
+}
+/*test.select_article_comment(<articleID>,function(result){
+    process.stdout.write(result.content);
+    process.stdout.write("  ");
+    console.log(result.authorname)
+});*/
+
+function count_comment_no(arID,callback){
+    var co_comment_no="select distinct count(*) as count from comments where articleID="+arID+" group by articleID";
+    connection.query(co_comment_no, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });
+    });
+}
+/*test.count_comment_no(<articleID>,function(result){
+    console.log(result.count);
+});
+*/
 
 
 function select_client_article(name,callback){
@@ -138,7 +174,7 @@ function select_client_article(name,callback){
     });
 }
 function select_client_comment(name,callback){
-    var sel_client_comment="select * from comments c, articles a where c.authorname="+'\''+name+'\''+" and a.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";
+    var sel_client_comment="select * from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";
     connection.query(sel_client_comment, function(error, results) {
         if (error) {
             return console.error(error);
@@ -367,6 +403,7 @@ function select_k(k,callback){
     console.log(result.count);//no. of likes
     console.log(result);//the row
 });*/
+
 module.exports={
     connection:connection,
     insert_client:insert_client,
@@ -388,5 +425,42 @@ module.exports={
     search:search,
     select_k:select_k,
     select_my_followees:select_my_followees,
-    select_my_followers:select_my_followers
+    select_my_followers:select_my_followers,
+    select_article_comment:select_article_comment,
+    count_comment_no:count_comment_no
+
 };
+
+
+
+
+
+
+
+/*
+// a new readfile.js later -> get the content of .txt files
+var fs=require("fs");
+var test=require('./test');
+var connection=test.connection;
+
+//put the contents of all paragraphs.txt files into a variable string and all the function
+function select_paragraphs(arID,callback){
+	test.select_article(arID,function(result){
+ 	    var para_times=result.parano;
+  		//console.log(result.parano);
+   		var string=[];
+    	for(var i=0;i<para_times;i++){
+    		var fileno=i+1;
+    		var filename=fileno+".txt";
+    		//console.log(filename);
+    		var data=fs.readFileSync(filename);
+    		string.push(data.toString());
+   		}
+    	return callback(string);
+	});
+}
+select_paragraphs(<articleID>,function(result){
+    console.log(result);
+});
+connection.end();
+*/
