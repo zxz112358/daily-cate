@@ -11,9 +11,9 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
     res.render('personalSec/profile', {
         title: 'Profile',
         name: 'Daily Cate',
-        user: req.user
+        user: req.user,
+        imgpath: '../profileimgs/' + req.user.username
     });
-    console.log(req.user);
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */
