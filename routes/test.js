@@ -248,6 +248,33 @@ function article_like(articleid,callback) {
         return callback(results[0]);
     })
 }
+function search(name,callback){
+    var an="select articlename, authorname from articles where authorname like "+'\''+"%"+name+"%"+'\''+"or articlename like"+'\''+"%"+name+"%"+'\'';
+    connection.query(an, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        if(Object.keys(results).length===0){
+            return callback(false);
+        }
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });
+    });
+    //return T or F
+}
+/*test.search(<search_key>,function(result){
+    if(result==false){
+    	console.log("no result found");
+    }
+    else{
+        console.log(result.articlename);
+        console.log(result.authorname);
+    }
+
+});*/
 module.exports={
     connection:connection,
     insert_client:insert_client,
@@ -265,5 +292,6 @@ module.exports={
     like_article:like_article,
     check_followers:check_followers,
     check_my_follow:check_my_follow,
-    article_like:article_like
+    article_like:article_like,
+    search:search
 };
