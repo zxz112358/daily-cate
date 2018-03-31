@@ -36,12 +36,8 @@ router.post('/', passport.authenticate('local', {
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
-        console.log(username);
-        console.log(password);
-
         test.select_user(username,function(result){
             if(result===false){
-                console.log("user name does not exist.");
                 return done(null,false, { message: 'Username doe not exist.' });
             }
             else{

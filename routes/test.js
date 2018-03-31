@@ -182,7 +182,7 @@ function select_article_list(tag){
 }
 
 function select_user(name,callback){
-    var sel_username="select username,photoid,email,password,description from client where username="+'\''+name+'\'';
+    var sel_username="select username,email,password,description from client where username="+'\''+name+'\'';
     connection.query(sel_username, function(error, results) {
         if (error) {
             return console.error(error);

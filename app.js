@@ -5,10 +5,12 @@ var logger = require('morgan');
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'profileimgs/');
+        cb(null, 'public/profileimgs/');
     },
     filename: function (req, file, cb) {
-        cb(null, req.body.name);
+        var extArray = file.mimetype.split("/");
+        var extension = extArray[extArray.length - 1];
+        cb(null, req.body.name);// + '.' + extension);
     }
 });
 var upload = multer({ storage: storage });

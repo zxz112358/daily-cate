@@ -12,6 +12,10 @@
 <h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
 <div class="w-75 font-weight-light mx-auto">Username: <%= user.username%></div>
 <div class="w-75 font-weight-light mx-auto">Description: <%= user.description%></div>
+
+<div class="w-75 font-weight-light mx-auto">Profile Image</div>
+<% var src = '../profileimgs/' + user.username %>
+<img src= <%= src%>>
 </body>
 
 </html>
