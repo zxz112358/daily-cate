@@ -11,16 +11,15 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
     res.render('personalSec/signin', {
         title: 'Sign In',
         name: 'Daily Cate',
-        message: req.flash('signup_success'),
-        username: req["user"]
+        signup_message: req.flash('signup_success'),
+        message: req.flash('error'),
+        user: req.user
     });
 });
 
 /* Check user's authentication, if already logged in, show messages */
 function authenticationMiddleware () {
     return function (req, res, next){
-        console.log(req.session.passport.user);
-
         if (req.isAuthenticated()){
             req.flash('signup_success', 'You are already logged in!');
         }
@@ -31,7 +30,8 @@ function authenticationMiddleware () {
 
 router.post('/', passport.authenticate('local', {
     successRedirect: 'profile',
-    failureRedirect: '/'
+    failureRedirect: '/personalSec/signin',
+    failureFlash : true
 }));
 
 passport.use(new LocalStrategy(
@@ -39,22 +39,33 @@ passport.use(new LocalStrategy(
         console.log(username);
         console.log(password);
 
-        //check whether the username exists, if exists, return password
-        var result = test.testing();
-        // var result;
-        // if (result.length === 0){
-        //     return done(null, false);
-        // }else if (result === password.toString()){
-        //     return done(null, 'suc');
-        // }
+        test.select_user(username,function(result){
+            if(result===false){
+                console.log("user name does not exist.");
+                return done(null,false, { message: 'Username doe not exist.' });
+            }
+            else{
+                console.log(result.username);
+                console.log(result.email);
+                console.log(result.password);
 
-        //delete after password can be retrieved from db
-        return done(null, username);
+                if (result.password === password){
+                    return done(null, result);
+                } else {
+                    return done(null,false, { message: 'Password incorrect.' });
+                }
+
+            }
+        });
     }
 ));
 
 passport.serializeUser(function(user, done) {
-    done(null, user);
+    done(null, {
+        username: user.username,
+        email: user.email,
+        description: user.description
+    });
 });
 
 passport.deserializeUser(function(user, done) {

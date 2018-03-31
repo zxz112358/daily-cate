@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
         title: 'Sign Up',
         name: 'Daily Cate',
         errors: undefined,
-        username: req["user"]
+        user: req.user
     });
 });
 

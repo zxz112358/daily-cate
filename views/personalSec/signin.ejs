@@ -11,8 +11,11 @@
 
 <body class="text-center bg-warning">
 
+<% if (signup_message){ %>
+    <div class="bg-success container text-white w-75" style="font-size: 1.5em"><%= signup_message%></div>
+<% } %>
 <% if (message){ %>
-    <div class="bg-success container text-white w-75" style="font-size: 1.5em"><%= message%></div>
+<div class="bg-info container text-white w-75" style="font-size: 1.5em"><%= message%></div>
 <% } %>
 
 <form class="form-signin w-25 mx-auto m-5" method="post">

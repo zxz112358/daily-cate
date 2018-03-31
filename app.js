@@ -2,6 +2,9 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+// var multer = require('multer');
+// var upload = multer({ dest: 'uploads/'});
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -83,7 +86,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
 
-
 //Validator
 app.use(expressValidator({
     errorFormatter: function (param, msg, value, location) {
@@ -123,25 +125,6 @@ app.use('/personalSec/signin', signin);
 app.use('/personalSec/signout', signout);
 app.use('/personalSec/profile', profile);
 app.use('/homepage/homepage',homepage);
-
-
-// passport.use(new LocalStrategy(
-//     function(username, password, done) {
-//         console.log(username);
-//         console.log(password);
-//
-//         //check whether the username exists, if exists, return password
-//         // var result;
-//         // if (result.length === 0){
-//         //     return done(null, false);
-//         // }else if (result === password.toString()){
-//         //     return done(null, 'suc');
-//         // }
-//
-//         //delete after password can be retrieved from db
-//         return done(null, 'suc');
-//     }
-// ));
 
 
 // catch 404 and forward to error handler

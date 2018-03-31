@@ -13,33 +13,29 @@ var connection = mysql.createConnection({
 
 
 //insert new client records into database
-function insert_client(name,email,pwd,desc){
-	var in_client = "insert into client values ("+'\''+name+'\''+","+'\''+email+'\''+","+'\''+pwd+'\''+","+'\''+desc+'\''+")";
-	connection.query(in_client, function(error, results) {
-    	if (error) {
-        	return console.error(error);   
-    	}
-    	console.log(results);   
-	});
-    //return T or F
-};
-/*
-function delete_client(name,email,pwd,desc){
-	var de_client = "delete from client where username="+'\''+name+'\'';
-};*/
+function insert_client(name,photoid,email,pwd,desc){
+    var in_client = "insert into client values ("+'\''+name+'\''+","+photoid+","+'\''+email+'\''+","+'\''+pwd+'\''+","+'\''+desc+'\''+")";
+    connection.query(in_client, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        //console.log(results);
+    });
+}
 
 //update the info. of a certain client
-function update_client(name,email,pwd,desc){
+function update_client(name,photoid,email,pwd,desc){
+    //whether change photoid?
 	var up_client = "update client set email="+'\''+email+'\''+",password="+'\''+pwd+'\''+",description="+'\''+desc+'\''+"where username="+'\''+name+'\'';
 	connection.query(up_client, function(error, results) {
     	if (error) {
         	return console.error(error);   
     	}
-    	console.log(results);   
+    	//console.log(results);
 	});
     //return T or F
     //whether need to load a new updated page for user
-};
+}
 
 //insert new article records into database
 function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,parastart){
@@ -51,7 +47,7 @@ function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,pa
    			if (error) {
         		return console.error(error);   
     		}
-    		console.log(results);   
+    		//console.log(results);
 		});
 	}
 	//paragraphs for this article will be stored before and pass the startID and paragraph numbers 
@@ -74,7 +70,7 @@ function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,pa
     	console.log(results);   
 	});
     //return T or F
-};
+}
 
 //delete an article with the given articleID
 function delete_article(arID){
@@ -85,8 +81,6 @@ function delete_article(arID){
     	}
     	console.log(results);   
 	});
-	connection.end();
-    //return T or F
 
 }
 
@@ -101,7 +95,7 @@ function insert_comment(coID,auname,content,arID){
 	});
     //return T or F
 
-};
+}
 
 //delete a comment with the given commentID
 function delete_comment(coID){
@@ -132,31 +126,52 @@ function select_article(arID){
     //return all pictures, paragrahs and comments of this article
 }
 
-//check the correctness of user input password
-function select_password(name){
-    var sel_password="select password from client where username="+'\''+name+'\'';
-    connection.query(sel_password, function(error, results) {
+function select_client_article(name,callback){
+    var sel_client_article="select * from articles where authorname="+'\''+name+'\'';
+    connection.query(sel_client_article, function(error, results) {
         if (error) {
-            return console.error(error);   
+            return console.error(error);
         }
-        console.log(results);   
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });
     });
-    //return password to check the correctness of user input password
+}
+function select_client_comment(name,callback){
+    var sel_client_comment="select * from comments c, articles a where c.authorname="+'\''+name+'\''+" and a.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";
+    connection.query(sel_client_comment, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });
+    });
 }
 
-//get all info of a specific user, includes all articles and personal info.
-function select_client_info(name){
-    var sel_client_info="select * from client c, articles a,comments o where c.username="+'\''+name+'\''+" and a.authorname="+'\''+name+'\''+" and o.authorname="+'\''+name+'\'';
-    connection.query(sel_client_info, function(error, results) {
-        if (error) {
-            return console.error(error);   
-        }
-        console.log(results);   
-    });
-    //how to get a.parastart, a.parano, a.picstart, a.picno
-    //based on the variables to return all the pictures and paragraphs of all articles of the author
-    //return all comments the author posted
-}
+/*test.select_client_article(<name_parameter>,function(result){
+	//process.stdout.write(result.articleID);
+	process.stdout.write(result.articlename);
+	process.stdout.write("  ");
+	console.log(result.posttime);
+
+
+    //console.log(result.content);
+
+});*/
+/*test.select_client_comment(<name_parameter>,function(result){
+	//process.stdout.write(result.commentID);
+	process.stdout.write(result.content);
+	process.stdout.write("  ");
+	console.log(result.articlename);
+
+
+});*/
+
 
 //select a list of article names based on the given tag for user to choose
 function select_article_list(tag){
@@ -171,6 +186,33 @@ function select_article_list(tag){
 
 }
 
+function select_user(name,callback){
+    var sel_username="select username,photoid,email,password,description from client where username="+'\''+name+'\'';
+    connection.query(sel_username, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        if(Object.keys(results).length===0){
+            return callback(false);
+        }
+        //console.log(results.username);
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });
+    });
+}
+/*test.select_username('8',function(result){
+    if(result==false){
+        console.log("empty");
+    }
+    else{
+        console.log(result.username);
+        console.log(result.email);
+    }
+
+});*/
 
 module.exports={
     connection:connection,
@@ -181,7 +223,9 @@ module.exports={
     insert_comment:insert_comment,
     delete_comment:delete_comment,
     select_article:select_article,
-    select_password:select_password,
-    select_client_info:select_client_info,
-    select_article_list:select_article_list
+    //select_password:select_password,
+    select_client_article:select_client_article,
+    select_client_comment:select_client_comment,
+    select_article_list:select_article_list,
+    select_user: select_user
 };
