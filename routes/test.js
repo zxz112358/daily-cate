@@ -220,7 +220,7 @@ function like_article(articleid,user) {
     })
 }
 function check_followers(name, callback) {
-    var ch_followers = "select count(user2) from follow where user2 = "+'\''+name+'\'';
+    var ch_followers = "select count(user2) as count from follow where user2 = "+'\''+name+'\'';
     connection.query(ch_followers,function (error, results) {
         if (error){
             return console.error(error);
@@ -228,9 +228,16 @@ function check_followers(name, callback) {
         return callback(results[0]);
     })
 }
+/*
+test.check_followers(<username>,function(result){
+        console.log(result.count);//how many people follow person <username>
+
+});*/
+
+
 
 function check_my_follow(name, callback) {
-    var ch_my_follow = "select count(user1) from follow where user1 ="+'\''+name+'\'';
+    var ch_my_follow = "select count(user1) as count from follow where user1 ="+'\''+name+'\'';
     connection.query(ch_my_follow,function (error, results) {
         if (error){
             return console.error(error);
@@ -240,7 +247,7 @@ function check_my_follow(name, callback) {
 }
 
 function article_like(articleid,callback) {
-    var ar_like = "select count(article) from followarticle where article ="+articleid;
+    var ar_like = "select count(article) as count from followarticle where article ="+articleid;
     connection.query(ar_like,function (error, results) {
         if (error){
             return console.error(error);
@@ -248,6 +255,8 @@ function article_like(articleid,callback) {
         return callback(results[0]);
     })
 }
+
+
 function search(name,callback){
     var an="select articlename, authorname from articles where authorname like "+'\''+"%"+name+"%"+'\''+"or articlename like"+'\''+"%"+name+"%"+'\'';
     connection.query(an, function(error, results) {
@@ -275,6 +284,28 @@ function search(name,callback){
     }
 
 });*/
+
+
+
+//select the articleid with kth largest number of likes
+function select_k(k,callback){
+    var se_nok="select distinct article, count(user) as count from followarticle group by article order by count desc";
+    connection.query(se_nok, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        if(Object.keys(results).length===0){
+            return callback(false);
+        }
+        return callback(results[k-1]);
+
+    });
+}
+/*test.select_k(<no>,function(result){
+    console.log(result.article);//the articleid
+    console.log(result.count);//no. of likes
+    console.log(result);//the row
+});*/
 module.exports={
     connection:connection,
     insert_client:insert_client,
@@ -293,5 +324,6 @@ module.exports={
     check_followers:check_followers,
     check_my_follow:check_my_follow,
     article_like:article_like,
-    search:search
+    search:search,
+    select_k:select_k
 };
