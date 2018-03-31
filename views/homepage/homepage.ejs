@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<% include ../header.ejs %>
 <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
@@ -13,6 +13,7 @@
             width: 1280px;
             height: 894px;
             position:relative;
+
             z-index:0;
             -webkit-filter: blur(0px);
 
@@ -73,7 +74,7 @@
 
 <body background="../images/pattern.svg">
 <div class="div-bottom">
-    <video id="video" autoplay muted loop>
+    <video id="video" poster="../images/videocover.jpg" autoplay muted loop>
         <source src="../images/homepage.mp4" type="video/mp4"/>
     </video>
     <div class="overlay">
@@ -82,7 +83,7 @@
         <p class="div-textmid2">Cook and Share!</p>
     </div>
 </div>
-<% include ../header.ejs %>
+
 
 <div class="container-fluid" style="background-color: #5a6268">
     <div class="carousel" id="myslider" data-ride="carousel">
