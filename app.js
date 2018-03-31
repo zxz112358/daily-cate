@@ -2,8 +2,16 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-// var multer = require('multer');
-// var upload = multer({ dest: 'uploads/'});
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'profileimgs/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, req.body.name);
+    }
+});
+var upload = multer({ storage: storage });
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -34,7 +42,7 @@ var profile = require('./routes/personalSec/profile');
 
 var homepage = require('./routes/homepage/homepage');
 
-var test = require('./test');
+var test = require('./routes/test');
 
 
 var app = express();

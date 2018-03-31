@@ -1,6 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
+var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'profileimgs/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, req.body.name);
+    }
+});
+var upload = multer({ storage: storage });
+//var upload = multer({ dest: 'profileimgs/'});
+
 var test = require('../test');
 var connection = test.connection;
 
@@ -14,7 +26,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.post('/', function (req,res,next) {
+router.post('/', upload.single('profileimg'), function (req,res,next) {
 
     //store in database
     var name = req.body.name;
@@ -29,6 +41,12 @@ router.post('/', function (req,res,next) {
     req.checkBody('password', 'Password field is required').notEmpty();
     req.checkBody('password2', 'Password does not match').equals(req.body.password);
 
+    //Handle profile img
+    if (req.file){
+        var profileimg = req.body.name;
+    } else {
+        var profileimg = 'default';
+    }
 
     //Check errors
     var errors = req.validationErrors();
