@@ -123,6 +123,7 @@ function select_article(arID){
 }
 
 
+
 function select_client_article(name,callback){
     var sel_client_article="select * from articles where authorname="+'\''+name+'\'';
     connection.query(sel_client_article, function(error, results) {
@@ -207,7 +208,7 @@ function follow(user1,user2) {
             return console.error(error);
         }
         console.log(results);
-    })
+    });
 }
 
 function like_article(articleid,user) {
@@ -217,7 +218,7 @@ function like_article(articleid,user) {
             return console.error(error);
         }
         console.log(results);
-    })
+    });
 }
 function check_followers(name, callback) {
     var ch_followers = "select count(user2) as count from follow where user2 = "+'\''+name+'\'';
@@ -226,7 +227,7 @@ function check_followers(name, callback) {
             return console.error(error);
         }
         return callback(results[0]);
-    })
+    });
 }
 /*
 test.check_followers(<username>,function(result){
@@ -235,6 +236,63 @@ test.check_followers(<username>,function(result){
 });*/
 
 
+function select_my_followees(name,callback){
+    var se_my_followees= "select user1 from follow where user2= "+'\''+name+'\'';
+    connection.query(se_my_followees,function (error, results) {
+        if (error){
+            return console.error(error);
+        }
+        if(Object.keys(results).length===0){
+            return callback(false);
+        }
+        return callback(results);
+    });
+}
+
+/*test.select_my_followees(<name_of_user2>,function(result){
+	//print the table includes all user1
+	if(result==false){
+		console.log("no followees");
+	}
+	else{
+    	console.log(result);
+    	//only print the username of user1
+    	Object.keys(result).forEach(function(key){
+        	var row=result[key];
+        	console.log(row.user1);
+		});
+	}
+
+});*/
+
+
+function select_my_followers(name, callback) {
+    var se_my_followers = "select user2 from follow where user1 ="+'\''+name+'\'';
+    connection.query(se_my_followers,function (error, results) {
+        if (error){
+            return console.error(error);
+        }
+        if(Object.keys(results).length===0){
+            return callback(false);
+        }
+        return callback(results);
+    });
+}
+/*test.select_my_followers(<name_of_user1>,function(result){
+	//print the table includes all user2
+	if(result==false){
+		console.log("no followers");
+	}
+	else{
+    	console.log(result);
+    	//only print the username of user2
+    	Object.keys(result).forEach(function(key){
+        	var row=result[key];
+        	console.log(row.user2);
+		});
+	}
+
+});*/
 
 function check_my_follow(name, callback) {
     var ch_my_follow = "select count(user1) as count from follow where user1 ="+'\''+name+'\'';
@@ -243,7 +301,7 @@ function check_my_follow(name, callback) {
             return console.error(error);
         }
         return callback(results[0]);
-    })
+    });
 }
 
 function article_like(articleid,callback) {
@@ -253,8 +311,10 @@ function article_like(articleid,callback) {
             return console.error(error);
         }
         return callback(results[0]);
-    })
+    });
 }
+
+
 
 
 function search(name,callback){
@@ -284,6 +344,7 @@ function search(name,callback){
     }
 
 });*/
+
 
 
 
@@ -325,5 +386,7 @@ module.exports={
     check_my_follow:check_my_follow,
     article_like:article_like,
     search:search,
-    select_k:select_k
+    select_k:select_k,
+    select_my_followees:select_my_followees,
+    select_my_followers:select_my_followers
 };
