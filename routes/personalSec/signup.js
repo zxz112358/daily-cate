@@ -7,13 +7,10 @@ var storage = multer.diskStorage({
         cb(null, 'public/profileimgs/');
     },
     filename: function (req, file, cb) {
-        var extArray = file.mimetype.split("/");
-        var extension = extArray[extArray.length - 1];
-        cb(null, req.body.name)
+        cb(null, req.body.name);
     }
 });
 var upload = multer({ storage: storage });
-//var upload = multer({ dest: 'profileimgs/'});
 
 var test = require('../test');
 var connection = test.connection;

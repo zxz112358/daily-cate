@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -14,6 +15,7 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
+var fs = require("fs");
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -35,6 +37,7 @@ var post1 = require('./routes/ingredientSec/post1');
 var post2 = require('./routes/ingredientSec/post2');
 var post3 = require('./routes/ingredientSec/post3');
 var exhibition = require('./routes/exhibitionSec/exhibition');
+var exhposting = require('./routes/exhibitionSec/exhposting');
 var asking = require('./routes/askingSec/asking');
 var helpPost = require('./routes/askingSec/helpPost');
 var signup = require('./routes/personalSec/signup');
@@ -128,6 +131,7 @@ app.use('/ingredientSec/post1', post1);
 app.use('/ingredientSec/post2', post2);
 app.use('/ingredientSec/post3', post3);
 app.use('/exhibitionSec/exhibition', exhibition);
+app.use('/exhibitionSec/exhposting', exhposting);
 app.use('/askingSec/asking', asking);
 app.use('/askingSec/helpPost', helpPost);
 app.use('/personalSec/signup', signup);
