@@ -23,14 +23,15 @@ router.get('/', function(req, res, next) {
 
 router.post('/', upload.any('picture'), function (req,res,next) {
     var i = 1;
-    var text = req.body.text;
-    var picture = req.body.picture;
+    var text = (typeof (req.body.text) == "string") ? [req.body.text]: req.body.text;
+    var picture = req.files;
 
     console.log('text: ', text);
     console.log('pic: ', picture);
 
-    for (var t in text) {
-        fs.writeFile("routes/exhibitionSec/texts/" + i, t, function (error) {
+    for (var j = 0; j < text.length; j++) {
+        console.log(text[j]);
+        fs.writeFile("routes/exhibitionSec/texts/" + i, text[j], function (error) {
             if (error){
                 console.log(error);
             }
