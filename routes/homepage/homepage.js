@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('homepage/homepage', {
-        title: 'Home',
+        title: 'Daily Cate',
         name:'Daily Cate',
         username: req["user"]
     });
