@@ -65,17 +65,16 @@ function count_paragraph_no(callback){
 }
 function count_picture_no(callback){
     var count_picture="select count(pictureID) as count from pictures";
+    var row;
     connection.query(count_picture, function(error, results) {
         if (error) {
             return console.error(error);
         }
         Object.keys(results).forEach(function(key){
-            var row=results[key];
+            row=results[key];
             return callback(row.count);
-
         });
-    });
-
+    })
 }
 /*test.count_article_no(function(result){
     console.log(result);
