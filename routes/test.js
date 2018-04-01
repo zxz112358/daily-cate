@@ -180,18 +180,19 @@ function select_article_comment(arID,callback){
         if (error) {
             return console.error(error);
         }
-        Object.keys(results).forEach(function(key){
+        return callback(Object.keys(results).length,results);
+        /*Object.keys(results).forEach(function(key){
             var row=results[key];
             return callback(row);
 
-        });
+        });*/
     });
 }
-/*test.select_article_comment(<articleID>,function(result){
-    process.stdout.write(result.content);
-    process.stdout.write("  ");
-    console.log(result.authorname)
+/*test.select_article_comment(<articleid>,function(result1,result2){
+    console.log(result1);//the no. of comments in that article;
+    console.log(result2);//all comments -> result2[i].content
 });*/
+/
 
 function count_comment_no(arID,callback){
     var co_comment_no="select distinct count(*) as count from comments where articleID="+arID+" group by articleID";
@@ -211,18 +212,18 @@ function count_comment_no(arID,callback){
 });
 */
 
-
 function select_client_article(name,callback){
     var sel_client_article="select * from articles where authorname="+'\''+name+'\'';
     connection.query(sel_client_article, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        Object.keys(results).forEach(function(key){
+        return callback(Object.keys(results).length,results);
+        /*Object.keys(results).forEach(function(key){
             var row=results[key];
             return callback(row);
 
-        });
+        });*/
     });
 }
 function select_client_comment(name,callback){
@@ -238,15 +239,9 @@ function select_client_comment(name,callback){
         });
     });
 }
-/*test.select_client_article(<name_parameter>,function(result){
-	//process.stdout.write(result.articleID);
-	process.stdout.write(result.articlename);
-	process.stdout.write("  ");
-	console.log(result.posttime);
-
-
-    //console.log(result.content);
-
+/*test.select_client_article('1',function(result1,result2){
+    var article_no=result1;
+    console.log(result2);
 });*/
 /*test.select_client_comment(<name_parameter>,function(result){
 	//process.stdout.write(result.commentID);
@@ -519,3 +514,25 @@ select_paragraphs(<articleID>,function(result){
 });
 connection.end();
 */
+
+/*
+//put all comments of an article into an array -> result2 -> result2[i] -> result2[i].content
+function select_comments(arID,callback){
+	test.select_article_comment(arID,function(result1,result2){
+		var comment_no=result1;
+		var string=[];
+		for(var i=0;i<comment_no;i++){
+			string.push(result2[i].content);
+		}
+		return callback(string);
+	});
+}
+select_comments(<articleID>,function(result){
+    console.log(result);//print the array all at once
+    //print the element one by one
+    Object.keys(result).forEach(function(key){
+        var row=result[key];
+        console.log(row);
+
+    });
+});*/

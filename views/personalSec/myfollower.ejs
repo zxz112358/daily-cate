@@ -8,22 +8,22 @@
 
 <% include ../header.ejs %>
 
-<body background="../images/pattern.svg">
-<div class="container-fluid" style="padding: 10px; background-color: #ffc107; text-align:center">
-    <img src="../images/pic.jpg" class="img-thumbnail img-circle" style="width: 60px;margin: 0 auto">
+<body background="../images/background2.jpg">
+<div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/personalhomepage.jpg');background-size:100% 100%;">
+    <img class="img-thumbnail img-circle" style="width: 140px;margin: 0 auto"  src=<%= imgpath %>>
     <p>
-    <h5 class="text-center">Name<br><small>Description</small></h5>
+    <h5 class="text-center" style="font-size:250%;font-weight:600;color:#FFA500"><%= user.username%><br><small><%= user.description%></small></h5>
     </p>
     <p>
-        <button class="btn btn-small" type="button">New post</button>
-        <button class="btn btn-small" type="button">Modify info</button>
+        <button class="btn btn-small" type="button" style="background-color:#FFA500">New post</button>
+        <button class="btn btn-small" type="button" style="background-color:#FFA500">Modify info</button>
     </p>
 </div>
 <div class="container-fluid" style="padding: 10px">
     <div class="row">
         <div class="col-2" style="text-align:right">
             <p>
-                <a href="./perpage" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Posts</a><br>
+                <a href="./profile" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Posts</a><br>
                 <a href="./mycomment" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Comments</a><br>
                 <a href="./myfollowing" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Followings</a><br>
                 <a href="./myfollower" class="btn btn-warning active" aria-pressed="true" role="button" style="width:75%">My Followers</a><br>
@@ -33,11 +33,12 @@
         <div class="col-10">
             <div class="container-fluid" style="padding:10px">
                 <div class="row">
-                    <% for (var i = 0; i < 2; i++) { %>
-                    <div class="col-3">
+                    <% for (var i = 0; i < 8; i++) { %>
+                    <div class="col-2" style="text-align:center;margin-top:10px;margin-bottom:10px;margin-right:60px;margin-left:40px;background-color:#FFCC00;padding-top:2px;">
                         <a href="./userpostpage">
-                            <img src="../images/pic.jpg" class="img-thumbnail img-circle" style="width: 60px">
-                            <h5>name<br><small>decription</small></h5>
+                            <img src="../images/pic.jpg" class="img-thumbnail img-circle" style="width: 140px">
+                            <p style="font-size:200%; color: #884400;font-weight: 600">name</p>
+                            <p style="font-size:100%; color:#884400">description</p>
                         </a>
                     </div>
 
@@ -51,7 +52,7 @@
 
 
 </div>
-
+<% include ../cprt.ejs %>
 </body>
 
 </html>
