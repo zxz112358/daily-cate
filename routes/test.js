@@ -34,21 +34,58 @@ function update_client(name,email,pwd,desc){
         //console.log(results);
     });
 }
-//how many articles are now in the databases
 function count_article_no(callback){
     var count_article="select count(articleID) as count from articles";
     connection.query(count_article, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        return callback(results);
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row.count);
+
+        });
+    });
+
+}
+function count_paragraph_no(callback){
+    var count_paragraph="select count(*) as count from paragraphs";
+    connection.query(count_paragraph, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        //console.log(results.count);
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row.count);
+
+        });
+    });
+
+}
+function count_picture_no(callback){
+    var count_picture="select count(pictureID) as count from pictures";
+    connection.query(count_picture, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row.count);
+
+        });
     });
 
 }
 /*test.count_article_no(function(result){
-    console.log(result.count);//result.count -> the no. of articles inside database
+    console.log(result);
+});
+test.count_paragraph_no(function(result){
+    console.log(result);
+});
+test.count_picture_no(function(result){
+    console.log(result);
 });*/
-
 
 
 
@@ -444,8 +481,9 @@ module.exports={
     select_my_followers:select_my_followers,
     select_article_comment:select_article_comment,
     count_comment_no:count_comment_no,
-    count_article_no:count_article_no
-
+    count_article_no:count_article_no,
+    count_paragraph_no:count_paragraph_no,
+    count_picture_no:count_picture_no
 
 };
 
