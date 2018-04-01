@@ -229,8 +229,7 @@ function select_client_article(name,callback){
 }
 
 function select_client_comment(name,callback){
-    var sel_client_comment="select * from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";
-    connection.query(sel_client_comment, function(error, results) {
+    var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";    connection.query(sel_client_comment, function(error, results) {
         if (error) {
             return console.error(error);
         }
