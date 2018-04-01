@@ -51,6 +51,8 @@ router.post('/', upload.any('picture'), function (req,res,next) {
             test.count_article_no(function(result){
                 console.log('arti: ', result + 1, 'title: ', title, 'username: ', req.user.username, 'picnum: ', picture.length, 'picstart: ', picstart+1, 'textnum: ', text.length, 'parastart: ', parastart + 1)
                 test.insert_article(result + 1, title, req.user.username, 'vegetables','2018-04-01', picture.length, picstart + 1, text.length, parastart + 1);
+
+                res.send('Successfully Posted!');
             });
         });
     });
