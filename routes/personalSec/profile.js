@@ -21,12 +21,13 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
         }
         for(var i=0;i<result1;i++){
             string2.push(result2[i].parastart+result2[i].parano-1);
-            string2[i]='../exhibitionSec/texts/'+string2[i];
+            string2[i]='./routes/exhibitionSec/texts/'+string2[i];
             var data=fs.readFileSync(string2[i]);
             string3.push(data.toString());
         }
 
-        console.log(string3);
+
+
             res.render('personalSec/profile', {
                 title: 'Profile',
                 name: 'Daily Cate',

@@ -540,8 +540,7 @@ function select_paragraphs(arID,callback){
 }
 select_paragraphs(<articleID>,function(result){
     console.log(result);
-});*/
-connection.end();
+});*
 
 
 /*
