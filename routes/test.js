@@ -234,24 +234,25 @@ function select_client_comment(name,callback){
         if (error) {
             return console.error(error);
         }
-        Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });
+        //console.log(results);
+        return callback(Object.keys(results).length,results);
     });
 }
 /*test.select_client_article('1',function(result1,result2){
-    var article_no=result1;
-    console.log(result2);
+    if(result1==0){
+        console.log("you do not have any article");
+    }
+    else{
+        console.log(result2);
+    }
 });*/
-/*test.select_client_comment(<name_parameter>,function(result){
-	//process.stdout.write(result.commentID);
-	process.stdout.write(result.content);
-	process.stdout.write("  ");
-	console.log(result.articlename);
-
-
+/*test.select_client_comment(<username>,function(result1,result2){
+    if(result1==0){
+        console.log("you do not have any comment");
+    }
+    else{
+        console.log(result2);
+    }
 });*/
 
 //select a list of article names based on the given tag for user to choose
