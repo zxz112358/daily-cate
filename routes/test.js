@@ -281,6 +281,29 @@ function select_article_list(tag,callback){
 
 });*/
 
+
+function select_all_article(callback){
+    var sel_all_article="select * from articles";
+    connection.query(sel_all_article, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+    });
+    //return the list of articles with articlenames and authornames
+
+}
+
+/*test.select_article_list(function(result1,result2){
+    if(result1==0){
+        console.log("no results found.");
+    }
+    else{
+        console.log(result2);
+    }
+
+});*/
+
 function select_user(name,callback){
     var sel_username="select username,email,password,description from client where username="+'\''+name+'\'';
     connection.query(sel_username, function(error, results) {
