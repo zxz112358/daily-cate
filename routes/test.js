@@ -213,18 +213,18 @@ function count_comment_no(arID,callback){
 });
 */
 
-
 function select_client_article(name,callback){
     var sel_client_article="select * from articles where authorname="+'\''+name+'\'';
     connection.query(sel_client_article, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        Object.keys(results).forEach(function(key){
+        return callback(Object.keys(results).length,results);
+        /*Object.keys(results).forEach(function(key){
             var row=results[key];
             return callback(row);
 
-        });
+        });*/
     });
 }
 function select_client_comment(name,callback){
@@ -240,15 +240,9 @@ function select_client_comment(name,callback){
         });
     });
 }
-/*test.select_client_article(<name_parameter>,function(result){
-	//process.stdout.write(result.articleID);
-	process.stdout.write(result.articlename);
-	process.stdout.write("  ");
-	console.log(result.posttime);
-
-
-    //console.log(result.content);
-
+/*test.select_client_article('1',function(result1,result2){
+    var article_no=result1;
+    console.log(result2);
 });*/
 /*test.select_client_comment(<name_parameter>,function(result){
 	//process.stdout.write(result.commentID);
