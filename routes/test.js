@@ -65,16 +65,17 @@ function count_paragraph_no(callback){
 }
 function count_picture_no(callback){
     var count_picture="select count(pictureID) as count from pictures";
-    var row;
     connection.query(count_picture, function(error, results) {
         if (error) {
             return console.error(error);
         }
         Object.keys(results).forEach(function(key){
-            row=results[key];
+            var row=results[key];
             return callback(row.count);
+
         });
-    })
+    });
+
 }
 /*test.count_article_no(function(result){
     console.log(result);
@@ -192,7 +193,7 @@ function select_article_comment(arID,callback){
     console.log(result1);//the no. of comments in that article;
     console.log(result2);//all comments -> result2[i].content
 });*/
-/
+
 
 function count_comment_no(arID,callback){
     var co_comment_no="select distinct count(*) as count from comments where articleID="+arID+" group by articleID";
@@ -226,6 +227,7 @@ function select_client_article(name,callback){
         });*/
     });
 }
+
 function select_client_comment(name,callback){
     var sel_client_comment="select * from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";
     connection.query(sel_client_comment, function(error, results) {

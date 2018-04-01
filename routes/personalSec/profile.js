@@ -8,12 +8,20 @@ var connection = test.connection;
 
 /* GET user profile page. */
 router.get('/', authenticationMiddleware(), function(req, res, next) {
-    res.render('personalSec/profile', {
-        title: 'Profile',
-        name: 'Daily Cate',
-        user: req.user,
-        imgpath: '../profileimgs/' + req.user.username
-    });
+
+    test.select_client_article(req.user.username,function(result1,result2){
+
+            res.render('personalSec/profile', {
+                title: 'Profile',
+                name: 'Daily Cate',
+                user: req.user,
+                imgpath: '../profileimgs/' + req.user.username,
+                articleno:result1,
+                result: result2
+            });
+        }
+    );
+
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */
@@ -28,5 +36,6 @@ function authenticationMiddleware () {
         }
     }
 }
+
 
 module.exports = router;
