@@ -16,6 +16,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 var fs = require("fs");
+var aio = require('array-indexof-object');
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');

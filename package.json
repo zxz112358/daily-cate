@@ -23,6 +23,7 @@
     "passport-local": "*",
     "passport-http": "*",
     "mysql": "*",
-    "fs": "*"
+    "fs": "*",
+    "array-indexof-object": "*"
   }
 }
