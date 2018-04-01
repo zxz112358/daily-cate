@@ -16,7 +16,9 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 var fs = require("fs");
+
 var aio = require('array-indexof-object');
+
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -138,6 +140,7 @@ app.use('/ingredientSec/post1', post1);
 app.use('/ingredientSec/post2', post2);
 app.use('/ingredientSec/post3', post3);
 app.use('/exhibitionSec/exhibition', exhibition);
+app.use('/exhibitionSec/exhposting', exhposting);
 app.use('/askingSec/asking', asking);
 app.use('/askingSec/helpPost', helpPost);
 app.use('/personalSec/signup', signup);
@@ -170,5 +173,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
