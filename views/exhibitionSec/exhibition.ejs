@@ -10,23 +10,26 @@
 
 <body background="../images/background2.jpg">
 <h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
+<a href = "./exhposting">Post new article</a>
 <div class="container bg-white">
     <ul class="nav nav-tabs">
-        <li><a href="#a" data-toggle="tab">a</a></li>
-        <li><a href="#b" data-toggle="tab">b</a></li>
-        <li><a href="#c" data-toggle="tab">c</a></li>
-        <li><a href="#d" data-toggle="tab">d</a></li>
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li><a href="#main" data-toggle="tab">Main Dish</a></li>
+        <li><a href="#dish" data-toggle="tab">Dishes</a></li>
+        <li><a href="#soup" data-toggle="tab">Soups</a></li>
+        <li><a href="#desert" data-toggle="tab">Deserts</a></li>
     </ul>
 
     <div class="tab-content">
-        <div class="tab-pane active" id="a">AAA</div>
-        <div class="tab-pane" id="b">BBB</div>
-        <div class="tab-pane" id="c">CCC</div>
-        <div class="tab-pane" id="d">DDD</div>
+        <div class="tab-pane active" id="all">
+            All Recipes
+        </div>
+        <div class="tab-pane" id="main">Main Dish Recipes</div>
+        <div class="tab-pane" id="dish">Dish Recipes</div>
+        <div class="tab-pane" id="soup">Soup Recipes</div>
+        <div class="tab-pane" id="desert">Desert Recipes</div>
     </div>
 </div>
-
-    <a href = "./exhposting">Post new article</a>
 
 </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
