@@ -15,8 +15,8 @@
     <h5 class="text-center" style="font-size:250%;font-weight:600;color:#FFA500"><%= user.username%><br><small><%= user.description%></small></h5>
     </p>
     <p>
-        <button class="btn btn-small" type="button">New post</button>
-        <button class="btn btn-small" type="button">Modify info</button>
+        <button class="btn btn-small" type="button" style="background-color:#FFA500">New post</button>
+        <button class="btn btn-small" type="button" style="background-color:#FFA500">Modify info</button>
     </p>
 </div>
 <div class="container-fluid" style="padding: 10px">
@@ -34,10 +34,11 @@
             <div class="container-fluid" style="padding:10px">
                 <div class="row">
                     <% for (var i = 0; i < 8; i++) { %>
-                    <div class="col-3" style="margin-top:10px;margin-bottom:10px;margin-right:60px;margin-left:40px;background-color:#FFCC00;padding-top:2px;">
+                    <div class="col-2" style="text-align:center;margin-top:10px;margin-bottom:10px;margin-right:60px;margin-left:40px;background-color:#FFCC00;padding-top:2px;">
                         <a href="./userpostpage">
                             <img src="../images/pic.jpg" class="img-thumbnail img-circle" style="width: 140px">
-                            <h5>name<br><small>decription</small></h5>
+                            <p style="font-size:200%; color: #884400;font-weight: 600">name</p>
+                            <p style="font-size:100%; color:#884400">description</p>
                         </a>
                     </div>
 
