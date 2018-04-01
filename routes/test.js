@@ -260,17 +260,26 @@ function select_client_comment(name,callback){
 });*/
 
 //select a list of article names based on the given tag for user to choose
-function select_article_list(tag){
-    var sel_article_list="select articlename,authorname from articles where tag="+'\''+tag+'\'';
+function select_article_list(tag,callback){
+    var sel_article_list="select * from articles where tag="+'\''+tag+'\'';
     connection.query(sel_article_list, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        console.log(results);
+        return callback(Object.keys(results).length,results);
     });
     //return the list of articles with articlenames and authornames
 
 }
+/*test.select_article_list(<tag_name>,function(result1,result2){
+    if(result1==0){
+        console.log("no results found.");
+    }
+    else{
+        console.log(result2);
+    }
+
+});*/
 
 function select_user(name,callback){
     var sel_username="select username,email,password,description from client where username="+'\''+name+'\'';
