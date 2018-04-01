@@ -239,10 +239,15 @@ function select_client_comment(name,callback){
 }
 /*test.select_client_article('1',function(result1,result2){
     if(result1==0){
-        console.log("you do not have any article");
+        console.log("you do not have article");
     }
     else{
+        var string=[];
+        for(var i=0;i<result1;i++){
+            string.push(result2[i].picturestart+result2[i].pictureno-1);
+        }
         console.log(result2);
+        console.log(string);
     }
 });*/
 /*test.select_client_comment(<username>,function(result1,result2){
