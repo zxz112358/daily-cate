@@ -18,6 +18,9 @@ var upload = multer({ storage: storage });
 var fs = require("fs");
 var aio = require('array-indexof-object');
 
+var aio = require('array-indexof-object');
+
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -47,6 +50,12 @@ var signout = require('./routes/personalSec/signout');
 var profile = require('./routes/personalSec/profile');
 
 var homepage = require('./routes/homepage/homepage');
+var mycomment = require('./routes/personalSec/mycomment');
+var myfollowing = require('./routes/personalSec/myfollowing');
+var myfollower = require('./routes/personalSec/myfollower');
+var mylike = require('./routes/personalSec/mylike');
+var userpostpage = require('./routes/personalSec/userpostpage');
+var perpage = require('./routes/personalSec/perpage');
 
 var test = require('./routes/test');
 
@@ -140,6 +149,12 @@ app.use('/personalSec/signin', signin);
 app.use('/personalSec/signout', signout);
 app.use('/personalSec/profile', profile);
 app.use('/homepage/homepage',homepage);
+app.use('/personalSec/mycomment',mycomment);
+app.use('/personalSec/mylike',mylike);
+app.use('/personalSec/myfollower',myfollower);
+app.use('/personalSec/myfollowing',myfollowing);
+app.use('/personalSec/userpostpage',userpostpage);
+app.use('/personalSec/perpage',perpage);
 
 
 // catch 404 and forward to error handler
