@@ -246,6 +246,9 @@ function select_client_comment(name,callback){
         for(var i=0;i<result1;i++){
             string.push(result2[i].picturestart+result2[i].pictureno-1);
         }
+        for(var i=0,i<result1,i++){
+            string[i]=string[i]
+        }
         console.log(result2);
         console.log(string);
     }
