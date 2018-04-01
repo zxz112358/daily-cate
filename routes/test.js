@@ -65,16 +65,17 @@ function count_paragraph_no(callback){
 }
 function count_picture_no(callback){
     var count_picture="select count(pictureID) as count from pictures";
-    var row;
     connection.query(count_picture, function(error, results) {
         if (error) {
             return console.error(error);
         }
         Object.keys(results).forEach(function(key){
-            row=results[key];
+            var row=results[key];
             return callback(row.count);
+
         });
-    })
+    });
+
 }
 /*test.count_article_no(function(result){
     console.log(result);
@@ -192,7 +193,7 @@ function select_article_comment(arID,callback){
     console.log(result1);//the no. of comments in that article;
     console.log(result2);//all comments -> result2[i].content
 });*/
-/
+
 
 function count_comment_no(arID,callback){
     var co_comment_no="select distinct count(*) as count from comments where articleID="+arID+" group by articleID";
@@ -226,30 +227,31 @@ function select_client_article(name,callback){
         });*/
     });
 }
+
 function select_client_comment(name,callback){
-    var sel_client_comment="select * from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";
-    connection.query(sel_client_comment, function(error, results) {
+    var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";    connection.query(sel_client_comment, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });
+        //console.log(results);
+        return callback(Object.keys(results).length,results);
     });
 }
 /*test.select_client_article('1',function(result1,result2){
-    var article_no=result1;
-    console.log(result2);
+    if(result1==0){
+        console.log("you do not have any article");
+    }
+    else{
+        console.log(result2);
+    }
 });*/
-/*test.select_client_comment(<name_parameter>,function(result){
-	//process.stdout.write(result.commentID);
-	process.stdout.write(result.content);
-	process.stdout.write("  ");
-	console.log(result.articlename);
-
-
+/*test.select_client_comment(<username>,function(result1,result2){
+    if(result1==0){
+        console.log("you do not have any comment");
+    }
+    else{
+        console.log(result2);
+    }
 });*/
 
 //select a list of article names based on the given tag for user to choose
