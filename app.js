@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -14,6 +15,8 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
+var fs = require("fs");
+var aio = require('array-indexof-object');
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -35,6 +38,7 @@ var post1 = require('./routes/ingredientSec/post1');
 var post2 = require('./routes/ingredientSec/post2');
 var post3 = require('./routes/ingredientSec/post3');
 var exhibition = require('./routes/exhibitionSec/exhibition');
+var exhposting = require('./routes/exhibitionSec/exhposting');
 var asking = require('./routes/askingSec/asking');
 var helpPost = require('./routes/askingSec/helpPost');
 var signup = require('./routes/personalSec/signup');
@@ -43,6 +47,12 @@ var signout = require('./routes/personalSec/signout');
 var profile = require('./routes/personalSec/profile');
 
 var homepage = require('./routes/homepage/homepage');
+var mycomment = require('./routes/personalSec/mycomment');
+var myfollowing = require('./routes/personalSec/myfollowing');
+var myfollower = require('./routes/personalSec/myfollower');
+var mylike = require('./routes/personalSec/mylike');
+var userpostpage = require('./routes/personalSec/userpostpage');
+var perpage = require('./routes/personalSec/perpage');
 
 var test = require('./routes/test');
 
@@ -135,6 +145,12 @@ app.use('/personalSec/signin', signin);
 app.use('/personalSec/signout', signout);
 app.use('/personalSec/profile', profile);
 app.use('/homepage/homepage',homepage);
+app.use('/personalSec/mycomment',mycomment);
+app.use('/personalSec/mylike',mylike);
+app.use('/personalSec/myfollower',myfollower);
+app.use('/personalSec/myfollowing',myfollowing);
+app.use('/personalSec/userpostpage',userpostpage);
+app.use('/personalSec/perpage',perpage);
 
 
 // catch 404 and forward to error handler
