@@ -181,18 +181,19 @@ function select_article_comment(arID,callback){
         if (error) {
             return console.error(error);
         }
-        Object.keys(results).forEach(function(key){
+        return callback(Object.keys(results).length,results);
+        /*Object.keys(results).forEach(function(key){
             var row=results[key];
             return callback(row);
 
-        });
+        });*/
     });
 }
-/*test.select_article_comment(<articleID>,function(result){
-    process.stdout.write(result.content);
-    process.stdout.write("  ");
-    console.log(result.authorname)
+/*test.select_article_comment(<articleid>,function(result1,result2){
+    console.log(result1);//the no. of comments in that article;
+    console.log(result2);//all comments -> result2[i].content
 });*/
+/
 
 function count_comment_no(arID,callback){
     var co_comment_no="select distinct count(*) as count from comments where articleID="+arID+" group by articleID";
@@ -520,3 +521,16 @@ select_paragraphs(<articleID>,function(result){
 });
 connection.end();
 */
+
+/*
+//put all comments of an article into an array -> result2 -> result2[i] -> result2[i].content
+test.select_article_comment(<articleID>,function(result1,result2){
+	var comment_no=result1;
+	var string=[];
+	for(var i=0;i<comment_no;i++){
+		string.push(result2[i].content);
+	}
+
+
+	console.log(string);
+});*/
