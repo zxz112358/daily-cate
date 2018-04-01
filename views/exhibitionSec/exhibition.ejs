@@ -10,10 +10,26 @@
 
 <body background="../images/background2.jpg">
 <h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
-  <p>Welcome to <%= title %></p>
-  <p>This is Exhibition Post Section</p>
+<div class="container bg-white">
+    <ul class="nav nav-tabs">
+        <li><a href="#a" data-toggle="tab">a</a></li>
+        <li><a href="#b" data-toggle="tab">b</a></li>
+        <li><a href="#c" data-toggle="tab">c</a></li>
+        <li><a href="#d" data-toggle="tab">d</a></li>
+    </ul>
 
-<a href = "./exhposting">Post new article</a>
+    <div class="tab-content">
+        <div class="tab-pane active" id="a">AAA</div>
+        <div class="tab-pane" id="b">BBB</div>
+        <div class="tab-pane" id="c">CCC</div>
+        <div class="tab-pane" id="d">DDD</div>
+    </div>
+</div>
+
+    <a href = "./exhposting">Post new article</a>
 
 </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 </html>

@@ -263,17 +263,49 @@ function select_client_comment(name,callback){
 });*/
 
 //select a list of article names based on the given tag for user to choose
-function select_article_list(tag){
-    var sel_article_list="select articlename,authorname from articles where tag="+'\''+tag+'\'';
+function select_article_list(tag,callback){
+    var sel_article_list="select * from articles where tag="+'\''+tag+'\'';
     connection.query(sel_article_list, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        console.log(results);
+        return callback(Object.keys(results).length,results);
     });
     //return the list of articles with articlenames and authornames
 
 }
+/*test.select_article_list(<tag_name>,function(result1,result2){
+    if(result1==0){
+        console.log("no results found.");
+    }
+    else{
+        console.log(result2);
+    }
+
+});*/
+
+
+function select_all_article(callback){
+    var sel_all_article="select * from articles";
+    connection.query(sel_all_article, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+    });
+    //return the list of articles with articlenames and authornames
+
+}
+
+/*test.select_all_article(function(result1,result2){
+    if(result1==0){
+        console.log("no results found.");
+    }
+    else{
+        console.log(result2);
+    }
+
+});*/
 
 function select_user(name,callback){
     var sel_username="select username,email,password,description from client where username="+'\''+name+'\'';
@@ -471,7 +503,10 @@ module.exports={
     count_comment_no:count_comment_no,
     count_article_no:count_article_no,
     count_paragraph_no:count_paragraph_no,
-    count_picture_no:count_picture_no
+    count_picture_no:count_picture_no,
+    select_all_article:select_all_article,
+    select_article_list:select_article_list
+
 
 };
 
@@ -481,8 +516,8 @@ module.exports={
 
 
 
-/*
-// a new readfile.js later -> get the content of .txt files
+
+/*// a new readfile.js later -> get the content of .txt files
 var fs=require("fs");
 var test=require('./test');
 var connection=test.connection;
@@ -505,9 +540,9 @@ function select_paragraphs(arID,callback){
 }
 select_paragraphs(<articleID>,function(result){
     console.log(result);
-});
+});*/
 connection.end();
-*/
+
 
 /*
 //put all comments of an article into an array -> result2 -> result2[i] -> result2[i].content
