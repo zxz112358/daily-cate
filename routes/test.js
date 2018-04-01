@@ -524,13 +524,22 @@ connection.end();
 
 /*
 //put all comments of an article into an array -> result2 -> result2[i] -> result2[i].content
-test.select_article_comment(<articleID>,function(result1,result2){
-	var comment_no=result1;
-	var string=[];
-	for(var i=0;i<comment_no;i++){
-		string.push(result2[i].content);
-	}
+function select_comments(arID,callback){
+	test.select_article_comment(arID,function(result1,result2){
+		var comment_no=result1;
+		var string=[];
+		for(var i=0;i<comment_no;i++){
+			string.push(result2[i].content);
+		}
+		return callback(string);
+	});
+}
+select_comments(<articleID>,function(result){
+    console.log(result);//print the array all at once
+    //print the element one by one
+    Object.keys(result).forEach(function(key){
+        var row=result[key];
+        console.log(row);
 
-
-	console.log(string);
+    });
 });*/
