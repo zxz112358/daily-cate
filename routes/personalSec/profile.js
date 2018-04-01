@@ -19,6 +19,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 articleno:result1,
                 result: result2
             });
+            console.log(result2.picturestart + result2.pictureno - 1);
         }
     );
 

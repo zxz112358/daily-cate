@@ -239,10 +239,15 @@ function select_client_comment(name,callback){
 }
 /*test.select_client_article('1',function(result1,result2){
     if(result1==0){
-        console.log("you do not have any article");
+        console.log("you do not have article");
     }
     else{
+        var string=[];
+        for(var i=0;i<result1;i++){
+            string.push(result2[i].picturestart+result2[i].pictureno-1);
+        }
         console.log(result2);
+        console.log(string);
     }
 });*/
 /*test.select_client_comment(<username>,function(result1,result2){
@@ -327,26 +332,17 @@ function select_my_followees(name,callback){
         if (error){
             return console.error(error);
         }
-        if(Object.keys(results).length===0){
-            return callback(false);
-        }
-        return callback(results);
+        return callback(Object.keys(results).length,results);
     });
 }
-
-/*test.select_my_followees(<name_of_user2>,function(result){
-	//print the table includes all user1
-	if(result==false){
-		console.log("no followees");
-	}
-	else{
-    	console.log(result);
-    	//only print the username of user1
-    	Object.keys(result).forEach(function(key){
-        	var row=result[key];
-        	console.log(row.user1);
-		});
-	}
+/*test.select_my_followees(<name_of_user2>,function(result1,result2){
+    //print the table includes all user2
+    if(result1==0){
+        console.log("no followees");
+    }
+    else{
+        console.log(result2[0].user1);
+    }
 
 });*/
 
@@ -357,27 +353,20 @@ function select_my_followers(name, callback) {
         if (error){
             return console.error(error);
         }
-        if(Object.keys(results).length===0){
-            return callback(false);
-        }
-        return callback(results);
+        return callback(Object.keys(results).length,results);
     });
 }
-/*test.select_my_followers(<name_of_user1>,function(result){
-	//print the table includes all user2
-	if(result==false){
-		console.log("no followers");
-	}
-	else{
-    	console.log(result);
-    	//only print the username of user2
-    	Object.keys(result).forEach(function(key){
-        	var row=result[key];
-        	console.log(row.user2);
-		});
-	}
+/*test.select_my_followers(<name_of_user1>,function(result1,result2){
+    //print the table includes all user2
+    if(result1==0){
+        console.log("no followers");
+    }
+    else{
+        console.log(result2[0].user2);
+    }
 
 });*/
+
 
 function check_my_follow(name, callback) {
     var ch_my_follow = "select count(user1) as count from follow where user1 ="+'\''+name+'\'';
